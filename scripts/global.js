@@ -37,9 +37,9 @@ function _onNavigate(event) {
         url     : requestURL,
         type    : 'get',
         error   : function(xhr, err) {
-            console.log('readyState', xhr.readyState); //1: loading, 2: loaded, 3: interactive, 4: complete
-            console.log('status', xhr.status);
-            console.log('responseText', xhr.responseText);
+            // console.log('readyState', xhr.readyState); //1: loading, 2: loaded, 3: interactive, 4: complete
+            // console.log('status', xhr.status);
+            // console.log('responseText', xhr.responseText);
 
             handleReadyState(xhr.readyState, xhr.status);
             
@@ -48,13 +48,32 @@ function _onNavigate(event) {
 
 }
 
+function _onRecentVersion() {
+    var url = new URL(requestURL);
+    
+    wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
+        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
+    });
+}
+
+function _onFirstVersion() {
+    var url = new URL(requestURL);
+    wmAvailabilityCheck(requestURL, "00000000000000", function(wayback_url, url) {
+        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
+    });
+}
+
 /* ------------------------------- */
 function handleReadyState(readyState, status) {
-    if (readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL)) {
+    if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
+        || readyState == 0 && status == 0) {
         // var myScriptTag = document.createElement('script');
         // myScriptTag.src = safari.extension.baseURI + 'scripts/client.js';
         // console.log(myScriptTag.src);
         // document.body.appendChild(myScriptTag);
+
+        console.log("readyState, status", readyState);
+
         var whitelist;
         var url = new URL(requestURL);
         if (url) {
@@ -63,24 +82,27 @@ function handleReadyState(readyState, status) {
             whitelist = [requestURL];
         }
         
-        wmAvailabilityCheck(requestURL, function(wayback_url, url) {
+        wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
             // currentScriptURL = safari.extension.addContentScriptFromURL(safari.extension.baseURI + "scripts/client.js", whitelist, [], false);
-            if (currentScriptURL != null) {
-                safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
-                    'SHOW_BANNER', 
-                    {wayback_url: wayback_url}
-                );
-            }
+            // if (currentScriptURL != null) {
+            safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
+                'SHOW_BANNER', 
+                {wayback_url: wayback_url}
+            );
+            // }
         });
     }
 }
 /**
  * Checks Wayback Machine API for url snapshot
  */
-function wmAvailabilityCheck(url, onsuccess, onfail) {
+function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     var xhr = new XMLHttpRequest();
     var requestUrl = WB_API_URL;
     var requestParams = "url=" + encodeURI(url);
+    if (timestamp != null) {
+        requestParams += "&&timestamp=" + timestamp;
+    }
     xhr.open("POST", requestUrl, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("Wayback-Api-Version", 2);

@@ -73,15 +73,17 @@ function _onSavePageNow() {
 }
 
 function _onRecentVersion() {
-    url = safari.application.activeBrowserWindow.activeTab.url;
-    open_url = "https://web.archive.org/web/2/" + encodeURI(url.replace(pattern, ""));
-    safari.application.activeBrowserWindow.activeTab.url = open_url;
+    // url = safari.application.activeBrowserWindow.activeTab.url;
+    // open_url = "https://web.archive.org/web/2/" + encodeURI(url.replace(pattern, ""));
+    // safari.application.activeBrowserWindow.activeTab.url = open_url;
+    safari.extension.globalPage.contentWindow._onRecentVersion();
 }
 
 function _onFirstVersion() {
-    url = safari.application.activeBrowserWindow.activeTab.url;
-    open_url = "https://web.archive.org/web/0/" + encodeURI(url.replace(pattern, ""));
-    safari.application.activeBrowserWindow.activeTab.url = open_url;
+    // url = safari.application.activeBrowserWindow.activeTab.url;
+    // open_url = "https://web.archive.org/web/0/" + encodeURI(url.replace(pattern, ""));
+    // safari.application.activeBrowserWindow.activeTab.url = open_url;
+    safari.extension.globalPage.contentWindow._onFirstVersion();
 }
 
 // Set the activation UI
