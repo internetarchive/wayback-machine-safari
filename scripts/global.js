@@ -72,7 +72,7 @@ function handleReadyState(readyState, status) {
         // console.log(myScriptTag.src);
         // document.body.appendChild(myScriptTag);
 
-        console.log("readyState, status", readyState);
+        // console.log("readyState, status", readyState);
 
         var whitelist;
         var url = new URL(requestURL);
