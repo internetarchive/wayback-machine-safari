@@ -60,9 +60,9 @@
 		</dict>
 	</dict>
 	<key>Description</key>
-	<string>Wayback Macine Extension for Safari detects dead pages, 404s, DNS failures &amp; a range of other web breakdowns and offers to show archived versions via the Internet Archive's Wayback Machine.  In addition use it to easily archive web pages, and see their most recent &amp; first archives.</string>
+	<string>Integrates your Safari browser with the Wayback Machine to help make your web surfing more reliable</string>
 	<key>DeveloperIdentifier</key>
-	<string>ZSFX78H3ZT</string>
+	<string>0000000000</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
