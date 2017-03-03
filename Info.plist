@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>Builder Version</key>
-	<string>11601.7.7</string>
+	<string>12602.1.50.0.10</string>
 	<key>CFBundleDisplayName</key>
 	<string>Wayback Machine</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yourcompany.waybackmachine</string>
+	<string>archive.org.waybackmachine</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
@@ -59,6 +59,8 @@
 			</array>
 		</dict>
 	</dict>
+	<key>Description</key>
+	<string>Wayback Macine Extension for Safari detects dead pages, 404s, DNS failures &amp; a range of other web breakdowns and offers to show archived versions via the Internet Archive's Wayback Machine.  In addition use it to easily archive web pages, and see their most recent &amp; first archives.</string>
 	<key>DeveloperIdentifier</key>
 	<string>ZSFX78H3ZT</string>
 	<key>ExtensionInfoDictionaryVersion</key>
