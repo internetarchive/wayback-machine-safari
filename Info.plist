@@ -77,6 +77,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://github.com/internetarchive/wayback-machine-safari/blob/master/Info.plist</string>
 	<key>Website</key>
 	<string>http://web.archive.org</string>
 </dict>
