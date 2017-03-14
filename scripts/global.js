@@ -46,11 +46,12 @@ function _onNavigate(event) {
         }   
     });
 
+    setExtensionIcon("Icon-64.png");
+
 }
 
 function _onRecentVersion() {
     var url = new URL(requestURL);
-    
     wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
@@ -83,15 +84,18 @@ function handleReadyState(readyState, status) {
         }
         
         wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
-            // currentScriptURL = safari.extension.addContentScriptFromURL(safari.extension.baseURI + "scripts/client.js", whitelist, [], false);
-            // if (currentScriptURL != null) {
             safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
                 'SHOW_BANNER', 
                 {wayback_url: wayback_url}
             );
-            // }
         });
-    }
+    } 
+
+    // console.log(httpFailCodes.indexOf(status));
+    // if (httpFailCodes.indexOf(status) == -1) {
+    //     console.log("New URL loaded");
+        
+    // }
 }
 /**
  * Checks Wayback Machine API for url snapshot
@@ -109,6 +113,13 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
         var wayback_url = getWaybackUrlFromResponse(response);
+
+        if (wayback_url !== null) {
+            setExtensionIcon("Icon-Smile.png");
+        } else {
+            setExtensionIcon("Icon-Frown.png");
+        }
+
         if (wayback_url !== null) {
             onsuccess(wayback_url, url);
         } else if (onfail) {
@@ -159,5 +170,12 @@ function isValidSnapshotUrl(url) {
 
 function makeHttps(url) {
     return url.replace(/^http:/, "https:");
+}
+
+function setExtensionIcon(fileName) {
+    var iconUri = safari.extension.baseURI + "image/" + fileName;
+    for (var i = 0; i < safari.extension.toolbarItems.length; i++) {
+        safari.extension.toolbarItems[i].image = iconUri;
+    }
 }
 /* ------------------------------- */

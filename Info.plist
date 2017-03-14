@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>Author</key>
+	<string>Internet Archive</string>
 	<key>Builder Version</key>
-	<string>12602.1.50.0.10</string>
+	<string>11602.4.8.0.1</string>
 	<key>CFBundleDisplayName</key>
 	<string>Wayback Machine</string>
 	<key>CFBundleIdentifier</key>
@@ -11,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.2.1</string>
+	<string>1.2.6</string>
 	<key>CFBundleVersion</key>
-	<string>1.2.1</string>
+	<string>1.2.6</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Global Page</key>
@@ -62,7 +64,7 @@
 	<key>Description</key>
 	<string>Integrates your Safari browser with the Wayback Machine to help make your web surfing more reliable</string>
 	<key>DeveloperIdentifier</key>
-	<string>0000000000</string>
+	<string>ZSFX78H3ZT</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
@@ -75,5 +77,7 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Website</key>
+	<string>http://web.archive.org</string>
 </dict>
 </plist>
