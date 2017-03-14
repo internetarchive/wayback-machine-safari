@@ -46,7 +46,7 @@ function _onNavigate(event) {
         }   
     });
 
-    setExtensionIcon("Icon-64.png");
+    // setExtensionIcon("Icon-64.png");
 
 }
 
@@ -114,11 +114,11 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
         var response = JSON.parse(xhr.responseText);
         var wayback_url = getWaybackUrlFromResponse(response);
 
-        if (wayback_url !== null) {
-            setExtensionIcon("Icon-Smile.png");
-        } else {
-            setExtensionIcon("Icon-Frown.png");
-        }
+        // if (wayback_url !== null) {
+        //     setExtensionIcon("Icon-Smile.png");
+        // } else {
+        //     setExtensionIcon("Icon-Frown.png");
+        // }
 
         if (wayback_url !== null) {
             onsuccess(wayback_url, url);
