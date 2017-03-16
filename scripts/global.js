@@ -134,6 +134,7 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
  * @return {string or null}
  */
 function getWaybackUrlFromResponse(response) {
+    console.log("Response", response);
     if (response.results &&
         response.results[0] &&
         response.results[0].archived_snapshots &&
@@ -143,6 +144,7 @@ function getWaybackUrlFromResponse(response) {
         response.results[0].archived_snapshots.closest.status.indexOf("2") === 0 &&
         isValidSnapshotUrl(response.results[0].archived_snapshots.closest.url)) 
     {
+        console.log("Snapshot_Closest_URL", response.results[0].archived_snapshots.closest.url);
         return makeHttps(response.results[0].archived_snapshots.closest.url);
     } else {
         return null;
