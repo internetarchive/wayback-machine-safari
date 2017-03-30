@@ -144,6 +144,7 @@ function getWaybackUrlFromResponse(response) {
         response.results[0].archived_snapshots.closest.status.indexOf("2") === 0 &&
         isValidSnapshotUrl(response.results[0].archived_snapshots.closest.url)) 
     {
+        console.log("Archived_Snapshots", response.results[0].archived_snapshots);
         console.log("Snapshot_Closest_URL", response.results[0].archived_snapshots.closest.url);
         return makeHttps(response.results[0].archived_snapshots.closest.url);
     } else {

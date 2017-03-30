@@ -81,5 +81,7 @@
 	<string>https://github.com/internetarchive/wayback-machine-safari/blob/master/Info.plist</string>
 	<key>Website</key>
 	<string>http://web.archive.org</string>
+	<key>Update From Gallery</key>
+	<true/>
 </dict>
 </plist>
