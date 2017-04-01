@@ -1,11 +1,14 @@
 li {
   line-height: 18px;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 .popup-menu {
   display: block;
   font-size: 15px;
-  min-width: 170px;
+  width: 200px;
+  height: 100%;
   padding: 3px 0;
   margin: 0;
   list-style: none;
@@ -48,4 +51,14 @@ li {
   background-color: #0088cc;
   color: #ffffff;
   cursor: pointer;
+}
+
+.button {
+    margin-top: 15px;
+}
+
+.resize-fit-center {
+    max-width:100%;
+    max-height:100%;
+    vertical-align: middle;
 }

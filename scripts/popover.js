@@ -107,8 +107,8 @@ $('document').ready(function() {
     $('#btn_first_version').click(function() {
         _onFirstVersion();
     });
+    safari.self.height = 250;
+    safari.self.width = 200;
 });
 
 // safari.application.activeBrowserWindow.openTab().url = open_url;
-
-
