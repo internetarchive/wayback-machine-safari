@@ -1,0 +1,4 @@
+#gitignore for Wayback Machine
+
+#node_modules/
+node_modules/

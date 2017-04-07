@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Internet Archive</string>
 	<key>Builder Version</key>
-	<string>11602.4.8.0.1</string>
+	<string>12602.4.8</string>
 	<key>CFBundleDisplayName</key>
 	<string>Wayback Machine</string>
 	<key>CFBundleIdentifier</key>
@@ -77,11 +77,11 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update From Gallery</key>
+	<true/>
 	<key>Update Manifest URL</key>
 	<string>https://github.com/internetarchive/wayback-machine-safari/blob/master/Info.plist</string>
 	<key>Website</key>
 	<string>http://web.archive.org</string>
-	<key>Update From Gallery</key>
-	<true/>
 </dict>
 </plist>

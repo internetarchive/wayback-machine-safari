@@ -8,6 +8,6 @@ function showPopoverCallback(event) {
     if (event.command === "NoMore404s") {
         safari.extension.toolbarItems[0].showPopover();
     }
-}
+} 
 
 safari.application.addEventListener("command", showPopoverCallback, false);
