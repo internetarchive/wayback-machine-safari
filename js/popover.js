@@ -3,6 +3,32 @@
  * you click on the Privly icon in the browser Safari.
  */
 
+var pattern = /https:\/\/web\.archive\.org\/web\/(.+?)\//g;
+
+$('document').ready(function() {
+    initEventHandler();
+});
+
+/**
+ * Function to init events of elements.
+ */
+function initEventHandler() {
+    $('#btn_save_page_now').click(function() {
+        _onSavePageNow();
+    });
+
+    $('#btn_recent_version').click(function() {
+        _onRecentVersion();
+    });
+
+    $('#btn_first_version').click(function() {
+        _onFirstVersion();
+    });
+
+    $("#deactivateExtension").click(deactivateExtension);
+    $("#activateExtension").click(activateExtension);
+}
+
 /**
  * Helper function for activateExtension() and deactivateExtension().
  *
@@ -55,17 +81,6 @@ function deactivateExtension() {
     }
 }
 
-/**
- * Helper function to open new tabs from the links.
- */
-function openPopoverPage() {
-
-    /* istanbul ignore if */
-    if (typeof safari !== "undefined" && safari.application !== undefined) {
-        safari.application.activeBrowserWindow.openTab().url = safari.extension.baseURI + this.getAttribute("data-popover-path");
-    }
-}
-
 function _onSavePageNow() {
     url = safari.application.activeBrowserWindow.activeTab.url;
     open_url = "https://web.archive.org/save/" + encodeURI(url.replace(pattern, ""));
@@ -73,42 +88,12 @@ function _onSavePageNow() {
 }
 
 function _onRecentVersion() {
-    // url = safari.application.activeBrowserWindow.activeTab.url;
-    // open_url = "https://web.archive.org/web/2/" + encodeURI(url.replace(pattern, ""));
-    // safari.application.activeBrowserWindow.activeTab.url = open_url;
     safari.extension.globalPage.contentWindow._onRecentVersion();
 }
 
 function _onFirstVersion() {
-    // url = safari.application.activeBrowserWindow.activeTab.url;
-    // open_url = "https://web.archive.org/web/0/" + encodeURI(url.replace(pattern, ""));
-    // safari.application.activeBrowserWindow.activeTab.url = open_url;
     safari.extension.globalPage.contentWindow._onFirstVersion();
 }
 
-// Set the activation UI
-$("#deactivateExtension").click(deactivateExtension);
-$("#activateExtension").click(activateExtension);
-
-// Open new windows from the links
-$(".popover_data").click(openPopoverPage);
-
-var pattern = /https:\/\/web\.archive\.org\/web\/(.+?)\//g;
-
-$('document').ready(function() {
-    $('#btn_save_page_now').click(function() {
-        _onSavePageNow();
-    });
-
-    $('#btn_recent_version').click(function() {
-        _onRecentVersion();
-    });
-
-    $('#btn_first_version').click(function() {
-        _onFirstVersion();
-    });
-});
-
-// safari.application.activeBrowserWindow.openTab().url = open_url;
 
 
