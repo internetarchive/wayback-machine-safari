@@ -1,13 +1,10 @@
-/*li {
-  line-height: 18px;
-}*/
-
-.popup-menu {
+.popup-menu { 
   display: block;
   font-size: 15px;
-  min-width: 170px;
-  list-style: none;
-  background-color: #1FB473;
+  min-width: 150px;
+  margin-top: 0px;
+  /*list-style: none;*/
+  /*background-color: #1FB473;
   border-color: rgba(0, 0, 0, 0.2);
   border-style: solid;
   border-width: 1px;
@@ -20,37 +17,20 @@
   border-radius: 5px;
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);*/
 }
-
-/*.popup-menu .divider {
-  background-color: #e5e5e5;
-  border-bottom: 1px solid #ffffff;
-  height: 1px;
-  margin: 8px 1px;
-  overflow: hidden;
-}*/
-
-/*.popup-menu a {
-  display: block;
-  color: #333333;
-  text-decoration: none;
-  padding: 3px 15px;
-  font-weight: normal;
-  line-height: 18px;
-}
-
-.popup-menu .active > a,
-.popup-menu li > a:hover,
-.popup-menu .active > a:hover {
-  background-color: #0088cc;
-  color: #ffffff;
-  cursor: pointer;
-}*/
 
 .logo {
-  width: 100%;
+  width: 192px;
+  margin: 4px;
   border-color: #0088cc;
   border-style: solid;
-  border-width: 2px;
+  border-width: 1px;
+}
+
+.social {
+  width: 100%;
+  margin-top: 4px;
+  display: inline-block;
+  text-align: center;
 }

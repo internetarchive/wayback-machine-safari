@@ -1,34 +1,33 @@
 <!DOCTYPE HTML>
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel = "stylesheet" href = "lib/bootstrap/bootstrap.min.css">
+        <link rel = "stylesheet" href = "lib/bootstrap/extend.min.css">
         <link rel = "stylesheet" href = "lib/fonts/brand-icons/brand-icons.min.css">
         <link rel = "stylesheet" href = "css/popover.css">
     </head>
     <body>
         <div class="popup-menu">
-            <img class="logo" src="image/car.gif"> 
+            <img class="logo" src="image/car.gif">
+            <button type="button" class="btn btn-block btn-success" id = "btn_save_page_now">Save Page Now</button>
+            <button type="button" class="btn btn-block btn-success" id = "btn_recent_version">Recent Version</button>
+            <button type="button" class="btn btn-block btn-success" id = "btn_first_version">First Version</button>
+            <div class="social">
+                <button type="button" class="btn btn-default social-facebook">
+                    <i class="icon bd-facebook" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-default social-twitter">
+                    <i class="icon bd-twitter" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-default social-instagram">
+                    <i class="icon bd-instagram" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
-        <!-- <ul class="popup-menu">
-            <li id="li_save_page_now">
-                <button type = "button" class = "btn btn-default btn-block" id = "btn_save_page_now">
-                    Save Page Now
-                </button>
-            </li>
-
-            <li id="li_recent_version">
-                <button type = "button" class = "btn btn-default btn-block" id = "btn_recent_version">
-                    Recent Version
-                </button>
-            </li>
-
-            <li id="li_first_version">
-                <button type = "button" class = "btn btn-default btn-block" id = "btn_first_version">
-                    First Version
-                </button>
-            </li>
-        </ul> -->
         
+        <script src = "lib/facebook/all.min.js"></script>
         <script src = "lib/jquery/jquery.min.js"></script>
         <script src = "js/popover.js"></script>
 

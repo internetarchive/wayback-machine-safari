@@ -3,10 +3,11 @@
  * you click on the Privly icon in the browser Safari.
  */
 
-var pattern = /https:\/\/web\.archive\.org\/web\/(.+?)\//g;
+var pattern = /https:\/\/web\.archive\.org\/web\/(.+?)\//g; 
 
 $('document').ready(function() {
     initEventHandler();
+    initSocialPlugin();
 });
 
 /**
@@ -25,8 +26,27 @@ function initEventHandler() {
         _onFirstVersion();
     });
 
+    $('.social-facebook').click(function() {
+        _onFacebook();
+    });
+
+    $('.social-twitter').click(function() {
+        _onTwitter();
+    });
+
+    $('.social-instagram').click(function() {
+        _onInstagram();
+    });
+
     $("#deactivateExtension").click(deactivateExtension);
     $("#activateExtension").click(activateExtension);
+}
+
+/**
+ * Function to init social plugins.
+ */
+function initSocialPlugin() {
+    
 }
 
 /**
@@ -93,6 +113,10 @@ function _onRecentVersion() {
 
 function _onFirstVersion() {
     safari.extension.globalPage.contentWindow._onFirstVersion();
+}
+
+function _onFacebook() {
+
 }
 
 
