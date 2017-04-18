@@ -24,13 +24,6 @@ function _onNavigate(event) {
         safari.extension.removeContentScript(currentScriptURL);
         currentScriptURL = "";
     }
-
-    /* - Get Status in XMLHttpRequest - */
-    // var request = new XMLHttpRequest();
-    // request.open('GET', requestURL, false);
-    // request.send(null);
-
-    // console.log(request.status);
     
     /* - Get Status in ajax - */
     $.ajax({
@@ -51,15 +44,13 @@ function _onNavigate(event) {
 }
 
 function _onRecentVersion() {
-    var url = new URL(requestURL);
-    wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
+    wmAvailabilityCheck(getOriginalURL(requestURL), null, function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
 }
 
 function _onFirstVersion() {
-    var url = new URL(requestURL);
-    wmAvailabilityCheck(requestURL, "00000000000000", function(wayback_url, url) {
+    wmAvailabilityCheck(getOriginalURL(requestURL), "00000000000000", function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
 }
@@ -181,5 +172,22 @@ function setExtensionIcon(fileName) {
     for (var i = 0; i < safari.extension.toolbarItems.length; i++) {
         safari.extension.toolbarItems[i].image = iconUri;
     }
+}
+
+/**
+ * Check url if provided by archive.org or not
+ * And return original url
+ * @param {string} url 
+ * @return {string}
+ */
+function getOriginalURL(url) {
+    var originalURL = null;
+    if ((url.match(/http/g) || []).length > 1) {
+        originalURL = url.substr(url.lastIndexOf("http"));
+    } else {
+        originalURL = url;
+    }
+
+    return originalURL;
 }
 /* ------------------------------- */

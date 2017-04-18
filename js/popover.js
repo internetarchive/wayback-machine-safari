@@ -120,28 +120,28 @@ function _onFirstVersion() {
  */
 function _onFacebook() {
     shareOnFacebook(
-      'https://chrome.google.com/webstore/detail/google-hangouts/nckgahadagoaajjgafhacjanaoiihapd',
-      'Google Hangouts',
-      'Hangouts brings conversations to life with photos, emoji, and even group video calls for free.',
-      'Hangouts Team',
-      'https://i.ytimg.com/vi/nZOYwpONhIQ/maxresdefault.jpg'
+      safari.application.activeBrowserWindow.activeTab.url,
+      safari.application.activeBrowserWindow.activeTab.title,
     )
 }
 
-function shareOnFacebook(url, title, desc, caption, imageUrl) {
+function shareOnFacebook(url, title) {
     var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = getSharingUrl(url, title, desc, caption, imageUrl)
+    newTab.url = getSharingUrl(url, title)
 }
 
 function getSharingUrl(url, title, desc, caption, imageUrl) {
     let uri = `?u=${encodeURIComponent(url)}`
         + `&title=${encodeURIComponent(title)}`
-        + `&description=${encodeURIComponent(desc)}`
-        + `&caption=${encodeURIComponent(caption)}`
-        + `&picture=${encodeURIComponent(imageUrl)}`
 
     return 'https://www.facebook.com/sharer/sharer.php' + uri
 }
+/***/
+
+/**
+ * Twitter sharing
+ */
+
 /***/
 
 
