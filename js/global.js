@@ -20,6 +20,11 @@ function _onBeforeNavigate(event) {
 }
 
 function _onNavigate(event) {
+    if (requestURL == "https://www.facebook.com/dialog/return/close?#_=_" ||
+        requestURL.indexOf("https://twitter.com/intent/tweet/complete") !== -1) {
+        safari.application.activeBrowserWindow.activeTab.close();
+    }
+
     if (currentScriptURL.length > 0) {
         safari.extension.removeContentScript(currentScriptURL);
         currentScriptURL = "";

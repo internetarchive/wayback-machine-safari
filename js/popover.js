@@ -34,10 +34,6 @@ function initEventHandler() {
         _onTwitter();
     });
 
-    $('.social-instagram').click(function() {
-        _onInstagram();
-    });
-
     $("#deactivateExtension").click(deactivateExtension);
     $("#activateExtension").click(activateExtension);
 }
@@ -141,8 +137,13 @@ function getSharingUrl(url, title, desc, caption, imageUrl) {
 /**
  * Twitter sharing
  */
-
+function _onTwitter() {
+    var url = "http://twitter.com/share?url=" + safari.application.activeBrowserWindow.activeTab.url + "&via=internetarchive";
+    var newTab = safari.application.activeBrowserWindow.openTab();
+    newTab.url = url;
+}
 /***/
+
 
 
 

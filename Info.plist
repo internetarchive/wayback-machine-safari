@@ -51,16 +51,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>Content</key>
-	<dict>
-		<key>Scripts</key>
-		<dict>
-			<key>End</key>
-			<array>
-				<string>scripts/injected.js</string>
-			</array>
-		</dict>
-	</dict>
 	<key>Description</key>
 	<string>Integrates your Safari browser with the Wayback Machine to help make your web surfing more reliable</string>
 	<key>DeveloperIdentifier</key>
