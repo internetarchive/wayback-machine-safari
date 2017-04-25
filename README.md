@@ -11,8 +11,6 @@ To build, simply run the following commands:
 
 * `gulp compile`
 
-This will install all dev dependencies, transpile and bundle JS, and install front-end dependencies.
-
 ## Places to update the version
 
 - Info.plist - update version
