@@ -20,9 +20,10 @@ function _onBeforeNavigate(event) {
 }
 
 function _onNavigate(event) {
-    if (requestURL == "https://www.facebook.com/dialog/return/close?#_=_" ||
-        requestURL.indexOf("https://twitter.com/intent/tweet/complete") !== -1) {
+    if (requestURL.indexOf("https://www.facebook.com/dialog/return/close") > -1 ||
+        requestURL.indexOf("https://twitter.com/intent/tweet/complete") > -1) {
         safari.application.activeBrowserWindow.activeTab.close();
+        return;
     }
 
     if (currentScriptURL.length > 0) {
@@ -35,10 +36,6 @@ function _onNavigate(event) {
         url     : requestURL,
         type    : 'get',
         error   : function(xhr, err) {
-            // console.log('readyState', xhr.readyState); //1: loading, 2: loaded, 3: interactive, 4: complete
-            // console.log('status', xhr.status);
-            // console.log('responseText', xhr.responseText);
-
             handleReadyState(xhr.readyState, xhr.status);
             
         }   
@@ -49,13 +46,15 @@ function _onNavigate(event) {
 }
 
 function _onRecentVersion() {
-    wmAvailabilityCheck(getOriginalURL(requestURL), null, function(wayback_url, url) {
+    var url = safari.application.activeBrowserWindow.activeTab.url;
+    wmAvailabilityCheck(getOriginalURL(url), null, function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
 }
 
 function _onFirstVersion() {
-    wmAvailabilityCheck(getOriginalURL(requestURL), "00000000000000", function(wayback_url, url) {
+    var url = safari.application.activeBrowserWindow.activeTab.url;
+    wmAvailabilityCheck(getOriginalURL(url), "00000000000000", function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
 }
@@ -64,12 +63,6 @@ function _onFirstVersion() {
 function handleReadyState(readyState, status) {
     if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
         || readyState == 0 && status == 0) {
-        // var myScriptTag = document.createElement('script');
-        // myScriptTag.src = safari.extension.baseURI + 'scripts/client.js';
-        // console.log(myScriptTag.src);
-        // document.body.appendChild(myScriptTag);
-
-        // console.log("readyState, status", readyState);
 
         var whitelist;
         var url = new URL(requestURL);
@@ -86,12 +79,6 @@ function handleReadyState(readyState, status) {
             );
         });
     } 
-
-    // console.log(httpFailCodes.indexOf(status));
-    // if (httpFailCodes.indexOf(status) == -1) {
-    //     console.log("New URL loaded");
-        
-    // }
 }
 /**
  * Checks Wayback Machine API for url snapshot
@@ -105,7 +92,7 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     }
     xhr.open("POST", requestUrl, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/1.3.0");
+    xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/1.3.2");
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
@@ -131,7 +118,6 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
  * @return {string or null}
  */
 function getWaybackUrlFromResponse(response) {
-    console.log("Response", response);
     if (response.results &&
         response.results[0] &&
         response.results[0].archived_snapshots &&
@@ -141,8 +127,6 @@ function getWaybackUrlFromResponse(response) {
         response.results[0].archived_snapshots.closest.status.indexOf("2") === 0 &&
         isValidSnapshotUrl(response.results[0].archived_snapshots.closest.url)) 
     {
-        console.log("Archived_Snapshots", response.results[0].archived_snapshots);
-        console.log("Snapshot_Closest_URL", response.results[0].archived_snapshots.closest.url);
         return makeHttps(response.results[0].archived_snapshots.closest.url);
     } else {
         return null;
