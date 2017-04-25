@@ -15,7 +15,7 @@ gulp.task('minifyCss', function() {
   return gulp.src(['./' + cssDir + '/*.css', '!./' + cssDir + '/*.min.css'])
     .pipe(cssmin())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('./public'));
+    .pipe(gulp.dest('./' + cssDir));
 });
 
 gulp.task('minifyJs', function (cb) {
@@ -27,7 +27,7 @@ gulp.task('minifyJs', function (cb) {
           drop_console: false
         }
       }),
-      gulp.dest('./public')
+      gulp.dest('./' + jsDir)
     ],
     cb
   );

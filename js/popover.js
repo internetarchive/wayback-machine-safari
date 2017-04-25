@@ -117,20 +117,20 @@ function _onFirstVersion() {
 function _onFacebook() {
     shareOnFacebook(
       safari.application.activeBrowserWindow.activeTab.url,
-      safari.application.activeBrowserWindow.activeTab.title,
-    )
+      safari.application.activeBrowserWindow.activeTab.title
+    );
 }
 
 function shareOnFacebook(url, title) {
     var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = getSharingUrl(url, title)
+    newTab.url = getSharingUrl(url, title);
 }
 
 function getSharingUrl(url, title, desc, caption, imageUrl) {
     let uri = `?u=${encodeURIComponent(url)}`
-        + `&title=${encodeURIComponent(title)}`
+        + `&title=${encodeURIComponent(title)}`;
 
-    return 'https://www.facebook.com/sharer/sharer.php' + uri
+    return 'https://www.facebook.com/sharer/sharer.php' + uri;
 }
 /***/
 
