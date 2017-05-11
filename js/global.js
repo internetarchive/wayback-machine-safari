@@ -22,7 +22,7 @@ function _onBeforeNavigate(event) {
 function _onNavigate(event) {
     if (requestURL.indexOf("https://www.facebook.com/dialog/return/close") > -1 ||
         requestURL.indexOf("https://twitter.com/intent/tweet/complete") > -1) {
-        safari.application.activeBrowserWindow.activeTab.close();
+        // safari.application.activeBrowserWindow.activeTab.close();
         return;
     }
 

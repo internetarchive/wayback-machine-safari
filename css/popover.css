@@ -3,34 +3,38 @@
   font-size: 15px;
   min-width: 150px;
   margin-top: 0px;
-  /*list-style: none;*/
-  /*background-color: #1FB473;
-  border-color: rgba(0, 0, 0, 0.2);
-  border-style: solid;
-  border-width: 1px;
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);*/
 }
 
 .logo {
-  width: 192px;
-  margin: 4px;
-  border-color: #0088cc;
-  border-style: solid;
-  border-width: 1px;
+  width           : 246px;
+  margin-left     : 1px;
 }
 
 .social {
-  width: 100%;
-  margin-top: 4px;
-  display: inline-block;
-  text-align: center;
+  width           : 100%;
+  display         : inline-block;
+  text-align      : center;
 }
+
+.social-facebook, .social-twitter {
+  width           : 40px;
+  height          : 30px;
+  margin-left     : 10px;
+  margin-right    : 10px;
+  padding         : 0px;
+  padding-top     : 0px;
+  padding-left    : 0px;
+  padding-right   : 0px;
+  padding-bottom  : 0px;   
+}
+
+.img-facebook, .img-twitter {
+  width           : 40px;
+  height          : 30px;
+}
+
+#btn_save_page_now, #btn_recent_version, #btn_first_version {
+  width           : 240px;
+  height          : 35px;
+  margin          : 5px;
+}  

@@ -127,8 +127,7 @@ function shareOnFacebook(url, title) {
 }
 
 function getSharingUrl(url, title, desc, caption, imageUrl) {
-    let uri = `?u=${encodeURIComponent(url)}`
-        + `&title=${encodeURIComponent(title)}`;
+    let uri = `?u=${encodeURIComponent(url)}` +  `&title=${encodeURIComponent(title)}`;
 
     return 'https://www.facebook.com/sharer/sharer.php' + uri;
 }
