@@ -92,7 +92,7 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     }
     xhr.open("POST", requestUrl, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/1.3.2");
+    xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/" + safari.extension.displayVersion);
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
