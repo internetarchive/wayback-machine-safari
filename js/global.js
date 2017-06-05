@@ -93,17 +93,16 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     xhr.open("POST", requestUrl, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/" + safari.extension.displayVersion);
+    xhr.setRequestHeader("Wayback-Extension-Version", "Wayback_Machine_Safari_EB/" + safari.extension.displayVersion);
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
         var wayback_url = getWaybackUrlFromResponse(response);
-
         // if (wayback_url !== null) {
         //     setExtensionIcon("Icon-Smile.png");
         // } else {
         //     setExtensionIcon("Icon-Frown.png");
         // }
-
         if (wayback_url !== null) {
             onsuccess(wayback_url, url);
         } else if (onfail) {
