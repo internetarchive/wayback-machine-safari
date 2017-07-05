@@ -34,6 +34,10 @@ function initEventHandler() {
         _onTwitter();
     });
 
+    $('.social-google').click(function() {
+        _onGooglePlus();
+    });
+
     $("#deactivateExtension").click(deactivateExtension);
     $("#activateExtension").click(activateExtension);
 }
@@ -142,6 +146,15 @@ function _onTwitter() {
     newTab.url = url;
 }
 /***/
+
+/**
+ * Google+ sharing
+ */
+function _onGooglePlus() {
+    var url = "https://plus.google.com/share?url=" + safari.application.activeBrowserWindow.activeTab.url;
+    var newTab = safari.application.activeBrowserWindow.openTab();
+    newTab.url = url;
+}
 
 
 
