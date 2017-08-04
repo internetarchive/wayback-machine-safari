@@ -1,48 +1,33 @@
 var httpFailCodes = [404, 408, 410, 451, 500, 502, 503, 504, 509, 520, 521, 523, 524, 525, 526];
-var WB_API_URL = "https://archive.org/wayback/available";
-var excluded_urls = [
-  "web.archive.org/web/",
-  "localhost",
-  "0.0.0.0",
-  "127.0.0.1"
-];
+var availability_api_URL = "https://archive.org/wayback/available";
 
 var requestURL = "";
-var currentScriptURL = "";
 
-$(document).ready(function() {
+window.onload = function(){
     safari.application.addEventListener('beforeNavigate', _onBeforeNavigate, true);
     safari.application.addEventListener('navigate', _onNavigate, true);
-});
+}
 
+// Event whenever a new URL is about load there
 function _onBeforeNavigate(event) {
     requestURL = event.url;
 }
 
+// Event when main frame of the new URL has loaded
 function _onNavigate(event) {
     if (requestURL.indexOf("https://www.facebook.com/dialog/return/close") > -1 ||
         requestURL.indexOf("https://twitter.com/intent/tweet/complete") > -1) {
         // safari.application.activeBrowserWindow.activeTab.close();
         return;
     }
-
-    if (currentScriptURL.length > 0) {
-        safari.extension.removeContentScript(currentScriptURL);
-        currentScriptURL = "";
-    }
-    
     /* - Get Status in ajax - */
     $.ajax({
         url     : requestURL,
         type    : 'get',
         error   : function(xhr, err) {
             handleReadyState(xhr.readyState, xhr.status);
-            
         }   
     });
-
-    // setExtensionIcon("Icon-64.png");
-
 }
 
 function _onRecentVersion() {
@@ -64,13 +49,13 @@ function handleReadyState(readyState, status) {
     if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
         || readyState == 0 && status == 0) {
 
-        var whitelist;
-        var url = new URL(requestURL);
-        if (url) {
-            whitelist = ["http://*", "https://*", url.protocol + "//" + url.host + "*"];
-        } else {
-            whitelist = [requestURL];
-        }
+        // var whitelist;
+        // var url = new URL(requestURL);
+        // if (url) {
+        //     whitelist = ["http://*", "https://*", url.protocol + "//" + url.host + "*"];
+        // } else {
+        //     whitelist = [requestURL];
+        // }
         
         wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
             safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
@@ -85,24 +70,17 @@ function handleReadyState(readyState, status) {
  */
 function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
     var xhr = new XMLHttpRequest();
-    var requestUrl = WB_API_URL;
     var requestParams = "url=" + encodeURI(url);
     if (timestamp != null) {
         requestParams += "&&timestamp=" + timestamp;
     }
-    xhr.open("POST", requestUrl, true);
+    xhr.open("POST", availability_api_URL, true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.setRequestHeader("User-Agent", "Wayback_Machine_Safari_EB/" + safari.extension.displayVersion);
     xhr.setRequestHeader("Wayback-Extension-Version", "Wayback_Machine_Safari_EB/" + safari.extension.displayVersion);
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
         var wayback_url = getWaybackUrlFromResponse(response);
-        // if (wayback_url !== null) {
-        //     setExtensionIcon("Icon-Smile.png");
-        // } else {
-        //     setExtensionIcon("Icon-Frown.png");
-        // }
         if (wayback_url !== null) {
             onsuccess(wayback_url, url);
         } else if (onfail) {
@@ -133,6 +111,12 @@ function getWaybackUrlFromResponse(response) {
 }
 
 function isValidUrl(url) {
+    var excluded_urls = [
+        "web.archive.org/web/",
+        "localhost",
+        "0.0.0.0",
+        "127.0.0.1"
+    ];
     for (var i = 0; i < excluded_urls.length; i++) {
         if (url.startsWith("http://" + excluded_urls[i]) || url.startsWith("https://" + excluded_urls[i])) {
             return false;
@@ -156,7 +140,7 @@ function makeHttps(url) {
 }
 
 function setExtensionIcon(fileName) {
-    var iconUri = safari.extension.baseURI + "image/" + fileName;
+    var iconUri = safari.extension.baseURI + "../../public/img/" + fileName;
     for (var i = 0; i < safari.extension.toolbarItems.length; i++) {
         safari.extension.toolbarItems[i].image = iconUri;
     }
@@ -178,4 +162,3 @@ function getOriginalURL(url) {
 
     return originalURL;
 }
-/* ------------------------------- */

@@ -64,6 +64,14 @@ function createEl(type, handler) {
     return el;
 }
 
+function checkIt(wayback_url) {
+    // Some pages use javascript to update the dom so poll to ensure
+    // the banner gets recreated if it is deleted.
+    enforceBannerInterval = setInterval(function() {
+        createBanner(wayback_url);
+    }, 500);
+}
+
 function createBanner(wayback_url) {
     if (document.getElementById("no-more-404s-message") !== null) {
         return;
@@ -239,13 +247,4 @@ function createBanner(wayback_url) {
     }, 100);
 
     bannerWasShown = true;
-}
-
-function checkIt(wayback_url) {
-    // Some pages use javascript to update the dom so poll to ensure
-    // the banner gets recreated if it is deleted.
-    enforceBannerInterval = setInterval(function() {
-        createBanner(wayback_url);
-    }, 500);
-
 }
