@@ -5,7 +5,7 @@
 	<key>Author</key>
 	<string>Internet Archive</string>
 	<key>Builder Version</key>
-	<string>12602.4.8</string>
+	<string>12602.1.50.0.10</string>
 	<key>CFBundleDisplayName</key>
 	<string>Wayback Machine</string>
 	<key>CFBundleIdentifier</key>
@@ -13,18 +13,18 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.7</string>
+	<string>1.3.8</string>
 	<key>CFBundleVersion</key>
-	<string>1.3.7</string>
+	<string>1.3.8</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Global Page</key>
-		<string>global.html</string>
+		<string>src/html/global.html</string>
 		<key>Popovers</key>
 		<array>
 			<dict>
 				<key>Filename</key>
-				<string>popover.html</string>
+				<string>src/html/popover.html</string>
 				<key>Height</key>
 				<integer>260</integer>
 				<key>Identifier</key>
@@ -39,7 +39,7 @@
 				<key>Identifier</key>
 				<string>Wayback Machine</string>
 				<key>Image</key>
-				<string>image/Icon-64.png</string>
+				<string>public/img/Icon-32.png</string>
 				<key>Include By Default</key>
 				<true/>
 				<key>Label</key>
@@ -57,14 +57,14 @@
 		<dict>
 			<key>End</key>
 			<array>
-				<string>js/injected.js</string>
+				<string>src/js/injected.js</string>
 			</array>
 		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Integrates your Safari browser with the Wayback Machine to help make your web surfing more reliable</string>
 	<key>DeveloperIdentifier</key>
-	<string>ZSFX78H3ZT</string>
+	<string>0000000000</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
