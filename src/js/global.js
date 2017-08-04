@@ -31,6 +31,7 @@ function _onNavigate(event) {
 }
 
 function _onRecentVersion() {
+    console.log("_onRecentVersion");
     var url = safari.application.activeBrowserWindow.activeTab.url;
     wmAvailabilityCheck(getOriginalURL(url), null, function(wayback_url, url) {
         safari.application.activeBrowserWindow.activeTab.url = wayback_url;
@@ -95,6 +96,7 @@ function wmAvailabilityCheck(url, timestamp, onsuccess, onfail) {
  * @return {string or null}
  */
 function getWaybackUrlFromResponse(response) {
+    console.log("Response - ", response);
     if (response.results &&
         response.results[0] &&
         response.results[0].archived_snapshots &&
