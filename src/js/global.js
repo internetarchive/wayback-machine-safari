@@ -49,14 +49,6 @@ function _onFirstVersion() {
 function handleReadyState(readyState, status) {
     if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
         || readyState == 0 && status == 0) {
-
-        // var whitelist;
-        // var url = new URL(requestURL);
-        // if (url) {
-        //     whitelist = ["http://*", "https://*", url.protocol + "//" + url.host + "*"];
-        // } else {
-        //     whitelist = [requestURL];
-        // }
         
         wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
             safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(

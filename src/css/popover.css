@@ -1,40 +1,23 @@
-.popup-menu { 
-  display: block;
-  font-size: 15px;
-  min-width: 150px;
-  margin-top: 0px;
-}
-
 .logo {
-  width           : 246px;
-  margin-left     : 1px;
+    width           : 216px;
+    margin          : 2px;
+}
+.element {
+    margin-left     : 5px;
+    margin-right    : 5px;
+    margin-bottom   : 5px;
+}
+#btn_save_page_now {
+    margin-top      : 20px; 
+}
+.social-btn-container {
+    margin-top      : 15px;
+    margin-bottom   : 15px;
+}
+.social-btn-container button {
+    width           : 36px;
+    height          : 36px;
+    border-radius   : 50%;
 }
 
-.social {
-  width           : 100%;
-  display         : inline-block;
-  text-align      : center;
-}
 
-.social-facebook, .social-twitter, .social-google {
-  width           : 40px;
-  height          : 30px;
-  margin-left     : 10px;
-  margin-right    : 10px;
-  padding         : 0px;
-  padding-top     : 0px;
-  padding-left    : 0px;
-  padding-right   : 0px;
-  padding-bottom  : 0px;   
-}
-
-.img-facebook, .img-twitter {
-  width           : 40px;
-  height          : 30px;
-}
-
-#btn_save_page_now, #btn_recent_version, #btn_first_version {
-  width           : 240px;
-  height          : 35px;
-  margin          : 5px;
-}  

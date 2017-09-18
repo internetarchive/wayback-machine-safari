@@ -5,30 +5,64 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel = "stylesheet" href = "../../public/vendor/bootstrap/bootstrap.min.css">
         <link rel = "stylesheet" href = "../../public/vendor/bootstrap/extend.min.css">
-        <link rel = "stylesheet" href = "../../public/vendor/fonts/brand-icons/brand-icons.min.css">
+        <link rel = "stylesheet" href = "../../public/vendor/fonts/font-awesome/font-awesome.min.css">
         <link rel = "stylesheet" href = "../css/popover.css">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body>
         <div class="popup-menu">
             <img class="logo" src="../../public/img/logo.png">
-            <button type="button" class="btn btn-block btn-success" id = "btn_save_page_now">Save Page Now</button>
-            <button type="button" class="btn btn-block btn-success" id = "btn_recent_version">Recent Version</button>
-            <button type="button" class="btn btn-block btn-success" id = "btn_first_version">First Version</button>
-            <div class="social">
-                <button type="button" class="btn btn-default social-facebook" id="btn_social_facebook">
-                    <img class="img-facebook" src="../../public/img/facebook.png">
+            <div class="element">
+                <input type="text" class="form-control typeahead" id="search_input" placeholder="Search">
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-success" id = "btn_save_page_now">Save Page Now</button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-primary" id = "btn_recent_version">Recent Version</button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-warning" id = "btn_first_version">First Version</button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-info">Overview</button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-info">Alexa</button>
+                <button type="button" class="btn btn-sm btn-info">Whois</button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm social-twitter">
+                    <i class="fa fa-twitter"></i> Tweets
                 </button>
-                <button type="button" class="btn btn-default social-twitter" id="btn_social_twitter">
-                    <img class="img-twitter" src="../../public/img/twitter.png">
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-sm btn-info">Radial tree</button>
+            </div>
+            <div class="element text-center social-btn-container">
+                <button type="button" class="btn social-facebook" id="btn_facebook">
+                    <i class="fa fa-facebook"></i>
                 </button>
-                <button type="button" class="btn btn-default social-google" id="btn_social_google">
-                    <img class="img-twitter" src="../../public/img/googleplus.png">
+                <button type="button" class="btn social-twitter" id="btn_twitter">
+                    <i class="fa fa-twitter"></i>
+                </button>
+                <button type="button" class="btn social-google-plus" id="btn_google">
+                    <i class="fa fa-google-plus"></i>
+                </button>
+                <button type="button" class="btn social-linkedin" id="linkedin">
+                    <i class="fa fa-linkedin"></i>
+                </button>
+            </div>
+            <div class="element text-center">
+                <button type="button" class="btn btn-danger btn-sm">About</button>
+                <button type="button" class="btn btn-default btn-sm">
+                    <i class="fa fa-cog"></i> Setting
                 </button>
             </div>
         </div>
         
         <script src = "../../public/vendor/jquery/jquery.min.js"></script>
+        <script src = "../../public/vendor/bootstrap-typeahead/bootstrap-typeahead.min.js"></script>
         <script src = "../js/popover.js"></script>
 
     </body>
