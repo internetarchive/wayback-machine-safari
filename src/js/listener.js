@@ -1,23 +1,56 @@
+window.onload = function(){
+    safari.application.addEventListener('beforeNavigate', _onBeforeNavigate, true);
+    safari.application.addEventListener('navigate', _onNavigate, true);
+}
+
+// Event whenever a new URL is about load there
+function _onBeforeNavigate(event) {
+    requestURL = event.url;
+}
+
+// Event when main frame of the new URL has loaded
+function _onNavigate(event) {
+    if (requestURL.indexOf("https://www.facebook.com/dialog/return/close") > -1 ||
+        requestURL.indexOf("https://twitter.com/intent/tweet/complete") > -1) {
+        // safari.application.activeBrowserWindow.activeTab.close();
+        return;
+    }
+    /* - Get Status in ajax - */
+    $.ajax({
+        url     : requestURL,
+        type    : 'get',
+        error   : function(xhr, err) {
+            handleReadyState(xhr.readyState, xhr.status);
+        }   
+    });
+}
+
 function _onSave() {
-    openURL(BaseURL + "/save/" + getURL());
+    openURL(BaseURL + "/save/", getURL());
 }
 
 function _onRecent() {
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    wmAvailabilityCheck(getOriginalURL(url), null, function(wayback_url, url) {
-        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
+    wmAvailabilityCheck(getURL(), function(){
+        openTab(BaseURL + "/web/2/", getURL());
+    }, function(err){
+        console.log(err);
     });
 }
 
 function _onFirst() {
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    wmAvailabilityCheck(getOriginalURL(url), "00000000000000", function(wayback_url, url) {
-        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
+    wmAvailabilityCheck(getURL(), function(){
+        openTab(BaseURL + "/web/0/", getURL());
+    }, function(err){
+        console.log(err);
     });
 }
 
 function _onOverview() {
-
+    wmAvailabilityCheck(getURL(), function(){
+        openTab(BaseURL + "/web/*/", getURL());
+    }, function(err){
+        console.log(err);
+    });
 }
 
 function _onAlexa() {
