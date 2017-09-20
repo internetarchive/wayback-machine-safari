@@ -2,78 +2,96 @@
  * @fileOverview This file provides for the menu that pops over when
  * you click on the Wayback Machine icon in the browser Safari.
  */
-
 window.onload = function(){
     initComponent();
     initEventHandler();
 }
 
-function _onSavePageNow() {
-    var pattern = /https:\/\/web\.archive\.org\/web\/(.+?)\//g; 
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    var open_url = "https://web.archive.org/save/" + encodeURI(url.replace(pattern, ""));
-    safari.application.activeBrowserWindow.activeTab.url = open_url;
+function _onSave() {
+    safari.extension.globalPage.contentWindow._onSave();
 }
 
-function _onRecentVersion() {
-    safari.extension.globalPage.contentWindow._onRecentVersion();
+function _onRecent() {
+    safari.extension.globalPage.contentWindow._onRecent();
 }
 
-function _onFirstVersion() {
-    safari.extension.globalPage.contentWindow._onFirstVersion();
+function _onFirst() {
+    safari.extension.globalPage.contentWindow._onFirst();
 }
 
-/**
- * Facebook sharing
- */
+function _onOverview() {
+    safari.extension.globalPage.contentWindow._onOverview();
+}
+
+function _onAlexa() {
+    safari.extension.globalPage.contentWindow._onAlexa();
+}
+
+function _onWhois() {
+    safari.extension.globalPage.contentWindow._onWhois();
+}
+
+function _onTweets() {
+    safari.extension.globalPage.contentWindow._onTweets();
+}
+
+function _onRadial() {
+    safari.extension.globalPage.contentWindow._onRadial();
+}
+
 function _onFacebook() {
-    if (!safari.application.activeBrowserWindow.activeTab.url) return;
-
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    var title = safari.application.activeBrowserWindow.activeTab.title;
-    var param = "?u=" + encodeURIComponent(url) +  "&title=" + encodeURIComponent(title);
-    var sharingURL = 'https://www.facebook.com/sharer/sharer.php' + param;
-    var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = sharingURL;
+    safari.extension.globalPage.contentWindow._onFacebook();
 }
 
-/**
- * Twitter sharing
- */
 function _onTwitter() {
-    if (!safari.application.activeBrowserWindow.activeTab.url) return;
-
-    var url = "http://twitter.com/share?url=" + safari.application.activeBrowserWindow.activeTab.url + "&via=internetarchive";
-    var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = url;
+    safari.extension.globalPage.contentWindow._onTwitter();
 }
-/**
- * Google+ sharing
- */
-function _onGooglePlus() {
-    if (!safari.application.activeBrowserWindow.activeTab.url) return;
 
-    var url = "https://plus.google.com/share?url=" + safari.application.activeBrowserWindow.activeTab.url;
-    var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = url;
+function _onGooglePlus() {
+    safari.extension.globalPage.contentWindow._onGooglePlus();
+}
+
+function _onLinkedin() {
+    safari.extension.globalPage.contentWindow._onLinkedin();
+}
+
+function _onAbout() {
+    safari.extension.globalPage.contentWindow._onAbout();
+}
+
+function _onSetting() {
+    safari.extension.globalPage.contentWindow._onSetting();
 }
 
 function initEventHandler() {
-    document.getElementById("btn_save_page_now").onclick    = _onSavePageNow;
-    document.getElementById("btn_recent_version").onclick   = _onRecentVersion;
-    document.getElementById("btn_first_version").onclick    = _onFirstVersion;
-    document.getElementById("btn_facebook").onclick         = _onFacebook;
-    document.getElementById("btn_twitter").onclick          = _onTwitter;
-    document.getElementById("btn_google").onclick           = _onGooglePlus;
+    document.getElementById("btn_save").onclick         = _onSave;
+    document.getElementById("btn_recent").onclick       = _onRecent;
+    document.getElementById("btn_first").onclick        = _onFirst;
+    document.getElementById("btn_overview").onclick     = _onOverview;
+    document.getElementById("btn_alexa").onclick        = _onAlexa;
+    document.getElementById("btn_whois").onclick        = _onWhois;
+    document.getElementById("btn_tweets").onclick       = _onTweets;
+    document.getElementById("btn_radial").onclick       = _onRadial;
+    document.getElementById("btn_facebook").onclick     = _onFacebook;
+    document.getElementById("btn_twitter").onclick      = _onTwitter;
+    document.getElementById("btn_google").onclick       = _onGooglePlus;
+    document.getElementById("btn_linkedin").onclick     = _onLinkedin;
+    document.getElementById("btn_about").onclick        = _onAbout;
+    document.getElementById("btn_setting").onclick      = _onSetting;
 }
 
 function initComponent() {
-    $("#search_input").typeahead({ 
+    // for Search Input
+    $("#search_term").typeahead({
         source          :["item1","item2","item3"],
         fitToElement    : true,
         items           : 5,
         showHintOnFocus : false,
     });
+
+    // Switchery for Auto Save
+    // var elem = document.getElementById("chk_auto_save");
+    // var switchery = new Switchery(elem, { size: 'small' });
 }
 
 /**

@@ -1,3 +1,4 @@
+var BaseURL = "https://web.archive.org";
 var httpFailCodes = [404, 408, 410, 451, 500, 502, 503, 504, 509, 520, 521, 523, 524, 525, 526];
 var availability_api_URL = "https://archive.org/wayback/available";
 
@@ -27,21 +28,6 @@ function _onNavigate(event) {
         error   : function(xhr, err) {
             handleReadyState(xhr.readyState, xhr.status);
         }   
-    });
-}
-
-function _onRecentVersion() {
-    console.log("_onRecentVersion");
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    wmAvailabilityCheck(getOriginalURL(url), null, function(wayback_url, url) {
-        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
-    });
-}
-
-function _onFirstVersion() {
-    var url = safari.application.activeBrowserWindow.activeTab.url;
-    wmAvailabilityCheck(getOriginalURL(url), "00000000000000", function(wayback_url, url) {
-        safari.application.activeBrowserWindow.activeTab.url = wayback_url;
     });
 }
 

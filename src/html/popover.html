@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <link rel = "stylesheet" href = "../../public/vendor/bootstrap/bootstrap.min.css">
         <link rel = "stylesheet" href = "../../public/vendor/bootstrap/extend.min.css">
+        <link rel = "stylesheet" href = "../../public/vendor/switchery/switchery.min.css">
         <link rel = "stylesheet" href = "../../public/vendor/fonts/font-awesome/font-awesome.min.css">
         <link rel = "stylesheet" href = "../css/popover.css">
         <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -13,31 +14,31 @@
         <div class="popup-menu">
             <img class="logo" src="../../public/img/logo.png">
             <div class="element">
-                <input type="text" class="form-control typeahead" id="search_input" placeholder="Search">
+                <input type="text" class="form-control typeahead" id="search_term" placeholder="Search">
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-success" id = "btn_save_page_now">Save Page Now</button>
+                <button type="button" class="btn btn-sm btn-success" id = "btn_save">Save Page Now</button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-primary" id = "btn_recent_version">Recent Version</button>
+                <button type="button" class="btn btn-sm btn-primary" id = "btn_recent">Recent Version</button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-warning" id = "btn_first_version">First Version</button>
+                <button type="button" class="btn btn-sm btn-warning" id = "btn_first">First Version</button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-info">Overview</button>
+                <button type="button" class="btn btn-sm btn-info" id="btn_overview">Overview</button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-info">Alexa</button>
-                <button type="button" class="btn btn-sm btn-info">Whois</button>
+                <button type="button" class="btn btn-sm btn-info" id="btn_alexa">Alexa</button>
+                <button type="button" class="btn btn-sm btn-info" id="btn_whois">Whois</button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm social-twitter">
+                <button type="button" class="btn btn-sm social-twitter" id="btn_tweets">
                     <i class="fa fa-twitter"></i> Tweets
                 </button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-sm btn-info">Radial tree</button>
+                <button type="button" class="btn btn-sm btn-info" id="btn_radial">Radial tree</button>
             </div>
             <div class="element text-center social-btn-container">
                 <button type="button" class="btn social-facebook" id="btn_facebook">
@@ -49,19 +50,34 @@
                 <button type="button" class="btn social-google-plus" id="btn_google">
                     <i class="fa fa-google-plus"></i>
                 </button>
-                <button type="button" class="btn social-linkedin" id="linkedin">
+                <button type="button" class="btn social-linkedin" id="btn_linkedin">
                     <i class="fa fa-linkedin"></i>
                 </button>
             </div>
             <div class="element text-center">
-                <button type="button" class="btn btn-danger btn-sm">About</button>
-                <button type="button" class="btn btn-default btn-sm">
+                <button type="button" class="btn btn-danger btn-sm" id="btn_about">About</button>
+                <button type="button" class="btn btn-default btn-sm" id="btn_setting">
                     <i class="fa fa-cog"></i> Setting
                 </button>
             </div>
+            <!-- <div class="element text-center">
+                <div class="setting-container">
+                    <div class="setting-body">
+                        <hr>
+                        <label>Auto save</label>
+                        <input type="checkbox" class="js-switch" id="chk_auto_save">
+                    </div>
+                    <div class="setting-footer">
+                        <button type="button" class="btn btn-default btn-sm" id="btn_setting_save">
+                            <i class="fa fa-save"></i> Save
+                        </button>
+                    </div>
+                </div>
+            </div> -->
         </div>
         
         <script src = "../../public/vendor/jquery/jquery.min.js"></script>
+        <script src = "../../public/vendor/switchery/switchery.min.js"></script>
         <script src = "../../public/vendor/bootstrap-typeahead/bootstrap-typeahead.min.js"></script>
         <script src = "../js/popover.js"></script>
 
