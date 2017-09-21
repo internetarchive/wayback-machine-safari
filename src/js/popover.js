@@ -2,6 +2,8 @@
  * @fileOverview This file provides for the menu that pops over when
  * you click on the Wayback Machine icon in the browser Safari.
  */
+var bloodhound;
+
 window.onload = function(){
     initComponent();
     initEventHandler();
@@ -123,6 +125,19 @@ function _onSaveSetting() {
     document.getElementById("setting_container").style.display = "none";
 }
 
+function _onSearch() {
+    bloodhound.clear();
+    var keyword = document.getElementById("search_term").value;
+
+    if (keyword.length < 3) return;
+    
+    safari.extension.globalPage.contentWindow._onSearch(keyword, function(suggestions){
+        suggestions.forEach(function(url){
+            bloodhound.add({url: url});
+        });
+    });
+}
+
 function initEventHandler() {
     document.getElementById("btn_save").onclick         = _onSave;
     document.getElementById("btn_recent").onclick       = _onRecent;
@@ -140,15 +155,23 @@ function initEventHandler() {
     document.getElementById("btn_setting").onclick      = _onSetting;
     document.getElementById("btn_about_back").onclick   = _onBack;
     document.getElementById("btn_setting_save").onclick = _onSaveSetting;
+    document.getElementById("search_term").onkeydown    = _onSearch;
 }
 
 function initComponent() {
-    // for Search Input
-    $("#search_term").typeahead({
-        source          :["item1","item2","item3"],
-        fitToElement    : true,
-        items           : 5,
-        showHintOnFocus : false,
+    //Typeahead for Search Input 
+    bloodhound = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace("url"),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: []
+    });
+    
+    var typeahead = $("#search_term").typeahead({
+        hint: true,
+        minLength: 3
+    }, {
+        displayKey: "url",
+        source: bloodhound
     });
 
     //Switchery for Auto Save
@@ -177,6 +200,7 @@ function getActiveURL() {
 function showMessage(message) {
     alert(message);
 }
+
 
 
 

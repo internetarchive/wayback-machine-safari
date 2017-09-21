@@ -30,6 +30,20 @@ function removeWhois(url) {
 
 }
 
+function getSuggestions(keyword, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", BaseURL + "/__wb/search/host?q=" + keyword, true);
+    xhr.onload = function() {
+        var data = JSON.parse(xhr.response);
+        var urls = [];
+        data.hosts.forEach(function(item){
+            urls.push(item.display_name);
+        });
+        callback(urls);
+    }
+    xhr.send(null);
+}
+
 function handleReadyState(readyState, status) {
     if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
         || readyState == 0 && status == 0) {
@@ -51,7 +65,7 @@ function wmAvailabilityCheck(url, onsuccess, onfail) {
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
-        var waybackURL = getWaybackUrlFromResponse(response);
+        var waybackURL = getWaybackURLFromResponse(response);
         if (waybackURL !== null) {
             onsuccess(waybackURL);
         } else if (onfail) {
@@ -65,7 +79,7 @@ function wmAvailabilityCheck(url, onsuccess, onfail) {
  * @param response {object}
  * @return {string or null}
  */
-function getWaybackUrlFromResponse(response) {
+function getWaybackURLFromResponse(response) {
     if (response.results &&
         response.results[0] &&
         response.results[0].archived_snapshots &&

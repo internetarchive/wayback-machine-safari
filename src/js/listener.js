@@ -68,7 +68,7 @@ function _onTweets(url) {
 }
 
 function _onRadial(url) {
-    
+
 }
 
 /**
@@ -96,6 +96,9 @@ function _onLinkedin(url) {
     openTab("https://www.linkedin.com/shareArticle?url=", url);
 }
 
-function _onSetting(url) {
-
+function _onSearch(keyword, callback) {
+    getSuggestions(keyword, function(urls){
+        console.log(urls);
+        callback(["suggestion1", "suggestion2", "suggestion3"]);
+    });
 }
