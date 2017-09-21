@@ -98,7 +98,6 @@ function _onLinkedin(url) {
 
 function _onSearch(keyword, callback) {
     getSuggestions(keyword, function(urls){
-        console.log(urls);
-        callback(["suggestion1", "suggestion2", "suggestion3"]);
+        callback(urls);
     });
 }

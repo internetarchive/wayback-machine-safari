@@ -2,7 +2,7 @@
  * @fileOverview This file provides for the menu that pops over when
  * you click on the Wayback Machine icon in the browser Safari.
  */
-var bloodhound;
+var bloodhound, typeahead;
 
 window.onload = function(){
     initComponent();
@@ -125,16 +125,17 @@ function _onSaveSetting() {
     document.getElementById("setting_container").style.display = "none";
 }
 
-function _onSearch() {
-    bloodhound.clear();
-    var keyword = document.getElementById("search_term").value;
+var tmpAry = [];
 
-    if (keyword.length < 3) return;
-    
+function _onSearch(evt) {
+    var keyword = getSearchTerm();
+
+    if (keyword.length < 3) return true;
+    tmpAry.forEach(function(url){
+        bloodhound.add({url: url});
+    });
     safari.extension.globalPage.contentWindow._onSearch(keyword, function(suggestions){
-        suggestions.forEach(function(url){
-            bloodhound.add({url: url});
-        });
+        tmpAry = suggestions;
     });
 }
 
@@ -155,7 +156,7 @@ function initEventHandler() {
     document.getElementById("btn_setting").onclick      = _onSetting;
     document.getElementById("btn_about_back").onclick   = _onBack;
     document.getElementById("btn_setting_save").onclick = _onSaveSetting;
-    document.getElementById("search_term").onkeydown    = _onSearch;
+    document.getElementById("search_term").onkeyup      = _onSearch;
 }
 
 function initComponent() {
@@ -166,7 +167,7 @@ function initComponent() {
         local: []
     });
     
-    var typeahead = $("#search_term").typeahead({
+    typeahead = $("#search_term").typeahead({
         hint: true,
         minLength: 3
     }, {
