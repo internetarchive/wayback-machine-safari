@@ -64,7 +64,11 @@ function _onTweets() {
 }
 
 function _onRadial() {
-    safari.extension.globalPage.contentWindow._onRadial(getURL());
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onRadial(getURL());
+    }
 }
 
 function _onFacebook() {
@@ -76,24 +80,47 @@ function _onFacebook() {
 }
 
 function _onTwitter() {
-    safari.extension.globalPage.contentWindow._onTwitter(getURL());
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onTwitter(getURL());
+    }
 }
 
 function _onGooglePlus() {
-    safari.extension.globalPage.contentWindow._onGooglePlus(getURL());
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onGooglePlus(getURL());
+    }
 }
 
 function _onLinkedin() {
-    safari.extension.globalPage.contentWindow._onLinkedin(getURL());
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onLinkedin(getURL());
+    }
 }
 
 function _onAbout() {
-    // safari.extension.globalPage.contentWindow._onAbout();
-    window.open("", "", "width=1000, height=1000");
+    document.getElementById("main_container").style.display = "none";
+    document.getElementById("about_container").style.display = "block";
+}
+
+function _onBack() {
+    document.getElementById("main_container").style.display = "block";
+    document.getElementById("about_container").style.display = "none";
 }
 
 function _onSetting() {
-    safari.extension.globalPage.contentWindow._onSetting();
+    document.getElementById("main_container").style.display = "none";
+    document.getElementById("setting_container").style.display = "block";
+}
+
+function _onSaveSetting() {
+    document.getElementById("main_container").style.display = "block";
+    document.getElementById("setting_container").style.display = "none";
 }
 
 function initEventHandler() {
@@ -111,6 +138,8 @@ function initEventHandler() {
     document.getElementById("btn_linkedin").onclick     = _onLinkedin;
     document.getElementById("btn_about").onclick        = _onAbout;
     document.getElementById("btn_setting").onclick      = _onSetting;
+    document.getElementById("btn_about_back").onclick   = _onBack;
+    document.getElementById("btn_setting_save").onclick = _onSaveSetting;
 }
 
 function initComponent() {
@@ -122,9 +151,9 @@ function initComponent() {
         showHintOnFocus : false,
     });
 
-    // Switchery for Auto Save
-    // var elem = document.getElementById("chk_auto_save");
-    // var switchery = new Switchery(elem, { size: 'small' });
+    //Switchery for Auto Save
+    var elem = document.getElementById("chk_auto_save");
+    var switchery = new Switchery(elem, { size: 'small' });
 }
 
 function getURL() {
@@ -149,23 +178,6 @@ function showMessage(message) {
     alert(message);
 }
 
-/**
- * Helper function for activateExtension() and deactivateExtension().
- *
- * @param {node} toShow The element that needs to be shown
- * @param {node} toHide The element that needs to be hidden
- */
-function extensionStateChange(toShow, toHide) {
-    
-    /* istanbul ignore if */
-    if (typeof safari !== "undefined" && safari.extension !== undefined) {
-        safari.extension.globalPage.contentWindow.modalButton.modeChange();
-    }
-
-    // Update the UI
-    $(toShow).show();
-    $(toHide).hide();
-}
 
 
 

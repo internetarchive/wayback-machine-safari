@@ -19,18 +19,36 @@
     height          : 36px;
     border-radius   : 50%;
 }
-.setting-container {
-    margin-top      : 15px;
+#about_container {
+    display         : none;
+    margin-top      : 20px;
+    margin-left     : 5px;
+    margin-right    : 5px;
 }
-.setting-container .setting-body hr {
-    margin-bottom   : 5px;
+#about_container ul {
+    -webkit-padding-start: 10px;
 }
-.setting-container .setting-body label {
-    margin-right    : 20px;
-    font-weight     : 300; 
+#about_container .btn-xs {
+    width           : 20px;
+    height          : 20px;
 }
-.setting-container .setting-footer {
-    margin-top: 5px;
+#about_container .btn-round {
+    border-radius   : 50%;
 }
+#setting_container {
+    display         : none;
+    margin-top      : 20px;
+    margin-left     : 5px;
+    margin-right    : 5px;
+}
+#setting_container .setting-body {
+    margin-top      : 10px; 
+    margin-bottom   : 30px; 
+}
+#setting_container .setting-body label {
+    margin-right    : 50px;
+    font-weight     : 300;  
+}
+
 
 

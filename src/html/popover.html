@@ -11,7 +11,7 @@
         <script src="https://apis.google.com/js/platform.js" async defer></script>
     </head>
     <body>
-        <div class="popup-menu">
+        <div id="main_container">
             <img class="logo" src="../../public/img/logo.png">
             <div class="element">
                 <input type="text" class="form-control typeahead" id="search_term" placeholder="Search" autocomplete="off">
@@ -60,20 +60,60 @@
                     <i class="fa fa-cog"></i> Setting
                 </button>
             </div>
-            <!-- <div class="element text-center">
-                <div class="setting-container">
-                    <div class="setting-body">
-                        <hr>
-                        <label>Auto save</label>
-                        <input type="checkbox" class="js-switch" id="chk_auto_save">
-                    </div>
-                    <div class="setting-footer">
-                        <button type="button" class="btn btn-default btn-sm" id="btn_setting_save">
-                            <i class="fa fa-save"></i> Save
-                        </button>
-                    </div>
-                </div>
-            </div> -->
+        </div>
+        <div id="about_container">
+            <button tyype="button" class="btn btn-primary" id="btn_about_back">
+                <i class="fa fa-arrow-left"></i> Back
+            </button>
+            <h4><strong>The Official Wayback Machine Extension:</strong></h4>
+            <p>The Internet Archive presents The Official WayBack Machine Extension. With the power of the WayBack&nbsp;Machine, we let you go in time to see how a URL has changed and evolved through the history of the Web!</p>
+            
+            <p><strong> Features</strong></p>
+            <li><strong>Save Page Now</strong></li>
+            <ul>Allows you to instantly save the page you are currently viewing in The WayBack Machine.</ul>
+            <li><strong>Recent Version &amp; First Version</strong></li>
+            <ul>View the most recent, and the first version of a page, in the WayBack Machine.</ul>
+            <li><strong>Alexa &amp; Whois</strong></li>
+            <ul>Gives analytical information about the page you are currently viewing, along with interesting facts, such as who owns it and how popular it is.</ul>
+            <li><strong>Tweets</strong></li>
+            <ul>Searches Twitter For information Regarding your current page.</ul> 
+
+            <p><strong>Modes</strong></p>
+            <li><button type="button" class="btn btn-xs btn-success"><i class="fa fa-check"></i></button></li>
+            <ul>Your page is in the WayBack Machine.</ul>
+            <li><button type="button" class="btn btn-xs btn-danger"><i class="fa fa-close"></i></button></li>
+            <ul>Your page is not Currently in the WayBack Machine.</ul>
+            <li><button type="button" class="btn btn-xs btn-danger btn-round"><i class="fa fa-minus"></i></button></li>
+            <ul>Your page can not be saved in the Wayback Machine.</ul>
+
+            <p><strong>License</strong></p>
+            <p>&nbsp;Copyright Internet Archive, 2017 AGPL-3</p>
+
+            <p><strong>Credit</strong></p> 
+            <li>Richard Caceres, @rchrd2</li>
+            <li>Mark Graham, @markgraham</li>
+            <li>Benjamin Mandel</li>
+            <li>Kumar Yoges</li>
+            <li>Anton, @anton</li>
+            <li>Abhidhas, @abhidas17695</li>
+            <li>Rakesh N Chinta, @rakesh-chinta</li><br>
+
+            <p><strong>Support</strong></p>
+            <p>&nbsp;info@archive.org</p><br>
+        </div>
+        <div id="setting_container">
+            <div class="setting-header text-center">
+                <h4>Setting</h4>
+            </div>
+            <div class="setting-body text-center">
+                <label>Auto save</label>
+                <input type="checkbox" class="js-switch" id="chk_auto_save">
+            </div>
+            <div class="setting-footer text-center">
+                <button type="button" class="btn btn-default btn-sm" id="btn_setting_save">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
         </div>
         
         <script src = "../../public/vendor/jquery/jquery.min.js"></script>
