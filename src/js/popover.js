@@ -8,55 +8,88 @@ window.onload = function(){
 }
 
 function _onSave() {
-    safari.extension.globalPage.contentWindow._onSave();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onSave(getURL());
+    }
 }
 
 function _onRecent() {
-    safari.extension.globalPage.contentWindow._onRecent();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onRecent(getURL());
+    }
 }
 
 function _onFirst() {
-    safari.extension.globalPage.contentWindow._onFirst();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onFirst(getURL());
+    }
 }
 
 function _onOverview() {
-    safari.extension.globalPage.contentWindow._onOverview();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onOverview(getURL());
+    }
 }
 
 function _onAlexa() {
-    safari.extension.globalPage.contentWindow._onAlexa();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onAlexa(getURL());
+    }
 }
 
 function _onWhois() {
-    safari.extension.globalPage.contentWindow._onWhois();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onWhois(getURL());
+    }
 }
 
 function _onTweets() {
-    safari.extension.globalPage.contentWindow._onTweets();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onTweets(getURL());
+    }
 }
 
 function _onRadial() {
-    safari.extension.globalPage.contentWindow._onRadial();
+    safari.extension.globalPage.contentWindow._onRadial(getURL());
 }
 
 function _onFacebook() {
-    safari.extension.globalPage.contentWindow._onFacebook();
+    if (!getURL()) {
+        showMessage("Please type a URL");
+    } else {
+        safari.extension.globalPage.contentWindow._onFacebook(getURL());
+    }
 }
 
 function _onTwitter() {
-    safari.extension.globalPage.contentWindow._onTwitter();
+    safari.extension.globalPage.contentWindow._onTwitter(getURL());
 }
 
 function _onGooglePlus() {
-    safari.extension.globalPage.contentWindow._onGooglePlus();
+    safari.extension.globalPage.contentWindow._onGooglePlus(getURL());
 }
 
 function _onLinkedin() {
-    safari.extension.globalPage.contentWindow._onLinkedin();
+    safari.extension.globalPage.contentWindow._onLinkedin(getURL());
 }
 
 function _onAbout() {
-    safari.extension.globalPage.contentWindow._onAbout();
+    // safari.extension.globalPage.contentWindow._onAbout();
+    window.open("", "", "width=1000, height=1000");
 }
 
 function _onSetting() {
@@ -92,6 +125,28 @@ function initComponent() {
     // Switchery for Auto Save
     // var elem = document.getElementById("chk_auto_save");
     // var switchery = new Switchery(elem, { size: 'small' });
+}
+
+function getURL() {
+    var url = null;
+    if (getSearchTerm() == "") {
+        url = getActiveURL();
+    } else {
+        url = getSearchTerm();
+    }
+    return url;
+}
+
+function getSearchTerm() {
+    return document.getElementById("search_term").value; 
+}
+
+function getActiveURL() {
+    return safari.application.activeBrowserWindow.activeTab.url;
+}
+
+function showMessage(message) {
+    alert(message);
 }
 
 /**

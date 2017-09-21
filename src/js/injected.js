@@ -2,10 +2,10 @@ safari.self.addEventListener("message", handleMessage, false);
 
 function handleMessage(event) {
     if (event.name == "SHOW_BANNER" ) {
-        if (event.message['wayback_url']) {
-            checkIt(event.message['wayback_url']);
-        }
-    } 
+        checkIt(event.message["waybackURL"]);
+    } else if (event.name == "SHOW_ABOUT") {
+        displayAbout(event.message["html"]);
+    }
 }
 
 var enforceBannerInterval;
@@ -70,6 +70,14 @@ function checkIt(wayback_url) {
     enforceBannerInterval = setInterval(function() {
         createBanner(wayback_url);
     }, 500);
+}
+
+function displayAbout(html) {
+    if (document.getElementById("wayback_about") !== null) return;
+
+    document.body.appendChild(createEl("div", function(el){
+        el.innerHTML = html;
+    }));
 }
 
 function createBanner(wayback_url) {

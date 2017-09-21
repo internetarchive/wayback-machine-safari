@@ -1,33 +1,20 @@
-function openTab(waybackURL, url) {
+function openTab(prefix, url) {
     if (url == "") return;
     var newTab = safari.application.activeBrowserWindow.openTab();
-    newTab.url = waybackURL + url;
+    newTab.url = prefix + url;
 }
 
-function openURL(waybackURL, url) {
+function openURL(prefix, url) {
     if (url == "") return;
-    safari.application.activeBrowserWindow.activeTab.url = waybackURL + url;
+    safari.application.activeBrowserWindow.activeTab.url = prefix + url;
 }
 
-function getURL() {
-    var url = "";
-    if (getSearchTerm() == "") {
-        url = getActiveURL();
-    } else {
-        url = getSearchTerm();
-    }
-
+function getOriginalURL(url) {
     removeWBM(url);
     removeAlexa(url);
     removeWhois(url);
-}
 
-function getSearchTerm() {
-    return document.getElementById("search_term").value; 
-}
-
-function getActiveURL() {
-    return safari.application.activeBrowserWindow.activeTab.url;
+    return url;
 }
 
 function removeWBM(url) {
@@ -43,16 +30,12 @@ function removeWhois(url) {
 
 }
 
-/* ------------------------------- */
 function handleReadyState(readyState, status) {
     if ((readyState == 4 && httpFailCodes.indexOf(status) >= 0 && isValidUrl(requestURL))
         || readyState == 0 && status == 0) {
         
-        wmAvailabilityCheck(requestURL, null, function(wayback_url, url) {
-            safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(
-                'SHOW_BANNER', 
-                {wayback_url: wayback_url}
-            );
+        wmAvailabilityCheck(requestURL, function(waybackURL) {
+            dispatchMessage("SHOW_BANNER", {waybackURL: waybackURL});
         });
     } 
 }
@@ -60,8 +43,6 @@ function handleReadyState(readyState, status) {
  * Checks Wayback Machine API for url snapshot
  */
 function wmAvailabilityCheck(url, onsuccess, onfail) {
-    if (url == "") onfail("Empty URL!");
-
     var xhr = new XMLHttpRequest();
     var requestParams = "url=" + encodeURI(url);
     xhr.open("POST", availability_api_URL, true);
@@ -70,11 +51,11 @@ function wmAvailabilityCheck(url, onsuccess, onfail) {
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
-        var wayback_url = getWaybackUrlFromResponse(response);
-        if (wayback_url !== null) {
-            onsuccess(wayback_url);
+        var waybackURL = getWaybackUrlFromResponse(response);
+        if (waybackURL !== null) {
+            onsuccess(waybackURL);
         } else if (onfail) {
-            onfail("URL not found in wayback archives!");
+            onfail();
         }
     };
     xhr.send(requestParams);
@@ -144,4 +125,8 @@ function getOriginalURL(url) {
     }
 
     return originalURL;
+}
+
+function dispatchMessage(name, data) {
+    safari.application.activeBrowserWindow.activeTab.page.dispatchMessage(name, data);
 }
