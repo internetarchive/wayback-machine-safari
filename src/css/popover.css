@@ -41,6 +41,10 @@
     margin-left     : 5px;
     margin-right    : 5px;
 }
+#setting_container hr {
+    margin-top      : 10px;
+    margin-bottom   : 10px;
+}
 #setting_container .setting-body {
     margin-top      : 10px; 
     margin-bottom   : 30px; 

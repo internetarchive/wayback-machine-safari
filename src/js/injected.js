@@ -265,8 +265,6 @@ function addResources(resources, callback, index) {
         var tmpAry = uri.split(".");
         var type = tmpAry[tmpAry.length - 1];
         var element, head, flag = false;
-        console.log(uri);
-        console.log(type);
         if (type == "css") {
             element = document.createElement("link");
             element.rel = "stylesheet";
@@ -279,10 +277,8 @@ function addResources(resources, callback, index) {
         } else {
             addResources(resources, callback, index + 1);
         }
-        element.onload = element.onreadystatechange = function() {
-            console.log("onload");
-            console.log("readyState-", this.readyState);
-            if (!flag && (!this.readyState || this.readyState == "complete")) {
+        element.onload = function() {
+            if (!flag) {
                 flag = true;
                 addResources(resources, callback, index + 1);
             }
