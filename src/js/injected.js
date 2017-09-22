@@ -3,6 +3,17 @@ safari.self.addEventListener("message", handleMessage, false);
 function handleMessage(event) {
     if (event.name == "SHOW_BANNER" ) {
         checkIt(event.message["waybackURL"]);
+    } else if (event.name="RADIAL_TREE") {
+        addResources([
+            "src/css/googlestyle.css",
+            "src/css/RTContent.css",
+            "src/css/sequences.css",
+            "public/vendor/d3/d3.min.js",
+            "src/js/RTContent.js",
+            "src/js/sequences.js"
+        ], function(){
+            showRadialTree(event.message["url"]);
+        });
     }
 }
 
@@ -245,4 +256,44 @@ function createBanner(wayback_url) {
     }, 100);
 
     bannerWasShown = true;
+}
+
+function addResources(resources, callback, index) {
+    if (!index) index = 0;
+    if (index < resources.length) {
+        var uri = resources[index];
+        var tmpAry = uri.split(".");
+        var type = tmpAry[tmpAry.length - 1];
+        var element, head, flag = false;
+        console.log(uri);
+        console.log(type);
+        if (type == "css") {
+            element = document.createElement("link");
+            element.rel = "stylesheet";
+            element.type = "text/css";
+            element.href = safari.extension.baseURI + uri;
+        } else if (type == "js") {
+            element = document.createElement("script");
+            element.type = "text/javascript";
+            element.src = safari.extension.baseURI + uri;
+        } else {
+            addResources(resources, callback, index + 1);
+        }
+        element.onload = element.onreadystatechange = function() {
+            console.log("onload");
+            console.log("readyState-", this.readyState);
+            if (!flag && (!this.readyState || this.readyState == "complete")) {
+                flag = true;
+                addResources(resources, callback, index + 1);
+            }
+        }
+        element.onerror = function() {
+            console.log("onerror");
+            addResources(resources, callback, index + 1);
+        }
+        head = document.getElementsByTagName("head")[0];
+        head.appendChild(element);
+    } else {
+        callback();
+    }
 }

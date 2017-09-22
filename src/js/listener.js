@@ -68,7 +68,7 @@ function _onTweets(url) {
 }
 
 function _onRadial(url) {
-
+    dispatchMessage("RADIAL_TREE", {url: getOriginalURL(url)});
 }
 
 /**
