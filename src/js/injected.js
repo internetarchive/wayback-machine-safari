@@ -6,17 +6,6 @@ function handleMessage(event) {
     } else if (event.name == "RADIAL_TREE") {
       displayRTContent();
       displayRadialTree(event.message["url"]);
-        // addResources([
-        //     "src/css/googlestyle.css",
-        //     "src/css/RTContent.css",
-        //     "src/css/sequences.css",
-        //     "public/vendor/d3/d3.min.js",
-        //     "src/js/RTContent.js"
-        // ], function(){
-        //     console.log(event.message["url"]);
-        //     displayRTContent();
-        //     displayRadialTree(event.message["url"]);
-        // });
     }
 }
 
@@ -261,44 +250,7 @@ function createBanner(wayback_url) {
     bannerWasShown = true;
 }
 
-function addResources(resources, callback, index) {
-    if (!index) index = 0;
-    if (index < resources.length) {
-        var uri = resources[index];
-        var tmpAry = uri.split(".");
-        var type = tmpAry[tmpAry.length - 1];
-        var element, head, flag = false;
-        if (type == "css") {
-            element = document.createElement("link");
-            element.rel = "stylesheet";
-            element.type = "text/css";
-            element.href = safari.extension.baseURI + uri;
-        } else if (type == "js") {
-            element = document.createElement("script");
-            element.type = "text/javascript";
-            element.src = safari.extension.baseURI + uri;
-        } else {
-            addResources(resources, callback, index + 1);
-        }
-        element.onload = function() {
-            if (!flag) {
-                flag = true;
-                addResources(resources, callback, index + 1);
-            }
-        }
-        element.onerror = function() {
-            console.log("onerror");
-            addResources(resources, callback, index + 1);
-        }
-        head = document.getElementsByTagName("head")[0];
-        head.appendChild(element);
-    } else {
-        callback();
-    }
-}
-
 function displayRadialTree(url) {
-  console.log("displayRadialTree");
   if(url.includes('https')){
       url=url.replace('https://','');
     }else{
@@ -543,7 +495,6 @@ function displayRadialTree(url) {
         
         var csv = d3.csvParseRows(text);
         var json = buildHierarchy(csv);
-        console.log(json);
         createVisualization(json);
         
         function createVisualization(json) {

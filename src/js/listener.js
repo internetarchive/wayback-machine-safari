@@ -55,11 +55,13 @@ function _onOverview(url) {
 }
 
 function _onAlexa(url) {
-    openTab("http://www.alexa.com/siteinfo/", getOriginalURL(url));
+    openTab("https://www.alexa.com/siteinfo/", getOriginalURL(url));
 }
 
 function _onWhois(url) {
-    openTab("http://www.whois.com/whois/", getOriginalURL(url));
+    console.log("URL-", url);
+    console.log("GetOriginalURL-", getOriginalURL(url));
+    openTab("https://www.whois.com/whois/", getOriginalURL(url));
 }
 
 function _onTweets(url) {

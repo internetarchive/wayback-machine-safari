@@ -10,10 +10,11 @@ function openURL(prefix, url) {
 }
 
 function getOriginalURL(url) {
-    removeWBM(url);
-    removeAlexa(url);
-    removeWhois(url);
-
+    url = removeWBM(url);
+    url = removeAlexa(url);
+    url = removeWhois(url);
+    url = removeTwitter(url);
+    url = removePort(url);
     return url;
 }
 
@@ -23,11 +24,23 @@ function removeWBM(url) {
 }
 
 function removeAlexa(url) {
-
+    var pattern = /https:\/\/www\.alexa\.com\/siteinfo\//g; 
+    return encodeURI(url.replace(pattern, ""));
 }
 
 function removeWhois(url) {
+    var pattern = /https:\/\/www\.whois\.com\/whois\//g; 
+    return encodeURI(url.replace(pattern, ""));
+}
 
+function removeTwitter(url) {
+    var pattern = /https:\/\/twitter\.com\/search\?q=/g; 
+    return encodeURI(url.replace(pattern, ""));
+}
+
+function removePort(url) {
+    var pattern = /:\d+\//g;
+    return encodeURI(url.replace(pattern, "/"));
 }
 
 function getSuggestions(keyword, callback) {
@@ -122,23 +135,6 @@ function isValidSnapshotUrl(url) {
 
 function makeHttps(url) {
     return url.replace(/^http:/, "https:");
-}
-
-/**
- * Check url if provided by archive.org or not
- * And return original url
- * @param {string} url
- * @return {string}
- */
-function getOriginalURL(url) {
-    var originalURL = null;
-    if ((url.match(/http/g) || []).length > 1) {
-        originalURL = url.substr(url.lastIndexOf("http"));
-    } else {
-        originalURL = url;
-    }
-
-    return originalURL;
 }
 
 function dispatchMessage(name, data) {

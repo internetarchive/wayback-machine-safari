@@ -1,6 +1,5 @@
 
 function displayRTContent() {
-    console.log("RTContent");
     var modal=document.createElement('div');
     modal.setAttribute('id','myModal');
     if (document.getElementById("myModal") != null) {
