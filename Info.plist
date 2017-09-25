@@ -13,9 +13,9 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0</string>
+	<string>2.0.1</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.0.1</string>
 	<key>Chrome</key>
 	<dict>
 		<key>Global Page</key>
@@ -57,9 +57,17 @@
 		<dict>
 			<key>End</key>
 			<array>
+				<string>public/vendor/d3/d3.min.js</string>
+				<string>src/js/RTContent.js</string>
 				<string>src/js/injected.js</string>
 			</array>
 		</dict>
+		<key>Stylesheets</key>
+		<array>
+			<string>src/css/googlestyle.css</string>
+			<string>src/css/RTContent.css</string>
+			<string>src/css/sequences.css</string>
+		</array>
 	</dict>
 	<key>Description</key>
 	<string>Integrates your Safari browser with the Wayback Machine to help make your web surfing more reliable</string>

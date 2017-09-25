@@ -35,6 +35,9 @@
 #about_container .btn-round {
     border-radius   : 50%;
 }
+#btn_setting {
+    display         : none;
+}
 #setting_container {
     display         : none;
     margin-top      : 20px;

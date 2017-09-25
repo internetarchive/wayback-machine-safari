@@ -1,6 +1,7 @@
 window.onload = function(){
     safari.application.addEventListener("beforeNavigate", _onBeforeNavigate, true);
     safari.application.addEventListener("navigate", _onNavigate, true);
+    safari.application.addEventListener("message", handleMessage, true);
 }
 
 // Event whenever a new URL is about load there
@@ -23,6 +24,12 @@ function _onNavigate(event) {
             handleReadyState(xhr.readyState, xhr.status);
         }
     });
+}
+
+function handleMessage(event) {
+    if (event.name = "OPEN_URL") {
+        openTab(event.message["wbURL"], getOriginalURL(event.message["pageURL"]));
+    }
 }
 
 function _onSave(url) {
