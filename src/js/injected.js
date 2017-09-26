@@ -165,7 +165,7 @@ function createBanner(wayback_url) {
 
             createEl("img",
                 function(el) {
-                    el.src = safari.extension.baseURI + "image/close.svg";
+                    el.src = safari.extension.baseURI + "public/img/close.svg";
                     el.alt = "close";
                     el.style.height = "16px";
                     el.style.transition = "background-color 100ms";
@@ -185,7 +185,7 @@ function createBanner(wayback_url) {
 
             createEl("img", function(el) {
                 el.id = "no-more-404s-image";
-                el.src = safari.extension.baseURI + "image/car.gif";
+                el.src = safari.extension.baseURI + "public/img/car.gif";
                 el.style.height = "auto";
                 el.style.position = "relative";
                 el.style.width = "100%";
