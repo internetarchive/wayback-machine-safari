@@ -251,6 +251,8 @@ function createBanner(wayback_url) {
 }
 
 function displayRadialTree(url) {
+  if (window.top !== window) return;
+  
   if(url.includes('https')){
       url=url.replace('https://','');
     }else{
