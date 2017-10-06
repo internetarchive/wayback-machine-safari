@@ -43,7 +43,9 @@ function _onRecent(url) {
 }
 
 function _onFirst(url) {
+    console.log("_onFirst-", getOriginalURL(url));
     wmAvailabilityCheck(getOriginalURL(url), function(){
+        console.log("_onFirst-");
         openTab(BaseURL + "/web/0/", getOriginalURL(url));
     });
 }

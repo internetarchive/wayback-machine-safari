@@ -39,6 +39,7 @@
     font-size: 18px;
     padding: 5px !important;
     text-align: center;
+    cursor: pointer;
 }
 .activebtn{
     background-color: green !important;

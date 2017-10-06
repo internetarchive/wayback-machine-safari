@@ -78,6 +78,7 @@ function wmAvailabilityCheck(url, onsuccess, onfail) {
     xhr.setRequestHeader("Wayback-Api-Version", 2);
     xhr.onload = function() {
         var response = JSON.parse(xhr.responseText);
+        console.log("wmAvailabilityCheck-", response);
         var waybackURL = getWaybackURLFromResponse(response);
         if (waybackURL !== null) {
             onsuccess(waybackURL);

@@ -19,6 +19,7 @@ function displayRTContent() {
         
         span.innerHTML='&times';
         span.setAttribute('class','RTclose');
+
         var main=document.createElement('div');
         var sequence=document.createElement('div');
         var chart=document.createElement('div');
@@ -27,7 +28,6 @@ function displayRTContent() {
         main.setAttribute('id','main');
         
         modal.appendChild(divBtn);
-        
         modal.appendChild(span);
         modal.appendChild(sequence);
         modal.appendChild(chart);
@@ -38,6 +38,7 @@ function displayRTContent() {
            
         span.onclick = function() {
             modal.style.display = "none";
+            modal.remove();
         }
     }
 }

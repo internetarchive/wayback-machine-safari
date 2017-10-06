@@ -252,7 +252,7 @@ function createBanner(wayback_url) {
 
 function displayRadialTree(url) {
   if (window.top !== window) return;
-  
+
   if(url.includes('https')){
       url=url.replace('https://','');
     }else{
@@ -290,7 +290,6 @@ function displayRadialTree(url) {
         }else if(url.includes('www0')){
             url=url.replace('www0','www');
         }
-
         if(url.indexOf('://www')==(-1)){
           url="http://www."+url.substring(7);
         }
@@ -317,30 +316,26 @@ function displayRadialTree(url) {
         if(url.slice(-2)=='//'){
           url = url.substring(0, url.length -1);
         }
+
         if(url.includes(',')){
           url=url.replace(/,/g ,'');
         }
-        
+
         response[i][1]=url;
         if(i==1){
-          
           paths_arr[0]=new Array();
           paths_arr[0].push(response[1]);
-          
-        }else if(response[i-1][1]==response[i][1]){
-          
+        } else if (response[i-1][1]==response[i][1]){
           paths_arr[j].push(response[i]);
-          
-        }else{
+        } else {
           j++;
           paths_arr[j]=new Array();
           paths_arr[j].push(response[i]);
         }
       }
-      
+
       var year_arr=new Array();
       for(var i=0;i<paths_arr.length;i++){
-        
         year_arr[i]=new Array();
         for(var j=0;j<paths_arr[i].length;j++){
           if(j==0){
@@ -358,11 +353,9 @@ function displayRadialTree(url) {
       
       for(var i=1;i<year_arr[0].length;i++){
         years[i-1]=new Array();
-        
         years[i-1].push(year_arr[0][i]);
-        
       }
-       
+      
       for(var i=0;i<year_arr.length;i++){
         var url=year_arr[i][0];
         for(var j=1;j<year_arr[i].length;j++){
@@ -392,10 +385,11 @@ function displayRadialTree(url) {
           if(url.includes('//')){
             url=url.split('//').join('/');
           }
-          url=url.split('/').join('>');
+          url=url.split('/').join('/');
           years[i][j]=url;
         }
       }
+
       var all_years=[];
       for(var i=0;i<years.length;i++){
         if(years[i].length>1){
@@ -411,19 +405,20 @@ function displayRadialTree(url) {
         }
         
         for(var i=x;i<years[n].length;i++){
+          
           if(i!=(years[n].length-1)){
-            text=text+years[n][i]+">end,1"+"\n";
+            text=text+years[n][i]+" ,1"+"\n";
           }else{
-            text=text+years[n][i]+">end,1";
+            text=text+years[n][i]+" ,1";
           }
         }
         return text;
-        
       }  
-      
+
       var divBtn=document.getElementById('divBtn');  
       if(document.getElementsByClassName('yearbtn').length==0){
         for(var i=0;i<all_years.length;i++){
+          
           var btn=document.createElement('button');
           btn.setAttribute('class','yearbtn');
           btn.setAttribute('id',all_years[i]);
@@ -432,8 +427,7 @@ function displayRadialTree(url) {
           divBtn.appendChild(btn);
         }
       }
-      
-      
+
       function highlightBtn(eventObj){
         var target=eventObj.target;
         if(document.getElementsByClassName('activebtn').length!=0){
@@ -442,21 +436,19 @@ function displayRadialTree(url) {
         }
         target.classList.add('activebtn');
         IAglobvar=target.id;
-        var num=all_years.indexOf(target.id);
+        var num=all_years.indexOf(target.id) ;
         var text=make_new_text(num);
         make_chart(text);
       }
+
       var btns=document.getElementsByClassName('yearbtn');
       if(document.getElementsByClassName('activebtn').length!=0){
-        
         var actId=document.getElementsByClassName('activebtn')[0].id;
         var index=all_years.indexOf(actId);
         IAglobvar=actId;
         var text=make_new_text(index);
         make_chart(text);
-        
-        
-      }else{
+      } else {
         btns[0].classList.add('activebtn');
         IAglobvar= document.getElementsByClassName('activebtn')[0].id;
         var text=make_new_text(0);
@@ -470,15 +462,12 @@ function displayRadialTree(url) {
         var width = window.innerWidth-150;
         var height = window.innerHeight-150;
         var radius = Math.min(width, height) / 2;
-        
         var b = {
           w: 100, h: 30, s: 3, t: 10
         };
         
         var colors=d3.scaleOrdinal(d3.schemeCategory20b);
-        
         var totalSize = 0; 
-        
         var vis = d3.select("#chart").append("svg:svg")
         .attr("width", width)
         .attr("height", height)
@@ -486,8 +475,7 @@ function displayRadialTree(url) {
         .attr("id", "container")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
         
-        var partition = d3.partition()
-        .size([2 * Math.PI, radius * radius]);
+        var partition = d3.partition().size([2 * Math.PI, radius * radius]);
         
         var arc = d3.arc()
         .startAngle(function(d) { return d.x0; })
@@ -495,20 +483,33 @@ function displayRadialTree(url) {
         .innerRadius(function(d) { return Math.sqrt(d.y0); })
         .outerRadius(function(d) { return Math.sqrt(d.y1); });
         
+        // Use d3.text and d3.csvParseRows so that we do not need to have a header
+        // row, and can receive the csv as an array of arrays.
+        
         var csv = d3.csvParseRows(text);
         var json = buildHierarchy(csv);
+        console.log(json);
         createVisualization(json);
         
-        function createVisualization(json) {
+        // Main function to draw and set up the visualization, once we have the data.
+        function createVisualization(json) {          
+          // Bounding circle underneath the sunburst, to make it easier to detect
+          // when the mouse leaves the parent g.
           vis.append("svg:circle")
           .attr("r", radius)
           .style("opacity", 0);
           
+          // Turn the data into a d3 hierarchy and calculate the sums.
           var root = d3.hierarchy(json)
           .sum(function(d) { return d.size; })
           .sort(function(a, b) { return b.value - a.value; });
           
+          // For efficiency, filter nodes to keep only those large enough to see.
           var nodes = partition(root).descendants()
+//          .filter(function(d) {
+//            return (d.x1 - d.x0 > 0.005); // 0.005 radians = 0.29 degrees
+//          });
+          
           var path = vis.data([json]).selectAll("path")
           .data(nodes)
           .enter().append("svg:path")
@@ -519,32 +520,35 @@ function displayRadialTree(url) {
             if(d.data.name=='end'){return '#000000';}
             else{
               return colors((d.children ? d : d.parent).data.name); 
-            }
+            }            
           })
           .style("opacity", 1)
-          .style("cursor", "pointer")
+          .style("cursor",'pointer')
           .on("mouseover", mouseover)
           .on("click",openTheUrl);
+          // Add the mouseleave handler to the bounding circle.
           d3.select("#container").on("mouseleave", mouseleave);
           
+          // Get total size of the tree = value of root node from partition.
           totalSize = path.datum().value;
         };
-        
         
         function openTheUrl(d){
           var year=IAglobvar;
           var anc=d.ancestors().reverse();
           var url="";
           for(var i=1;i<anc.length;i++){
-            if(anc[i].data.name=='end'){
+            if(anc[i].data.name == 'end'){
               break;
             }
-            url=url+'/'+anc[i].data.name;
+            url = url+'/'+anc[i].data.name;
           }
-          var wbURL="https://web.archive.org/web/"+year+"*";
+
+          var wbURL =" https://web.archive.org/web/" + year + "0630";
           safari.self.tab.dispatchMessage("OPEN_URL", {wbURL: wbURL, pageURL: url});
         }
         
+        // Fade all but the current sequence, and show it in the breadcrumb trail.
         function mouseover(d) {
           var percentage = (100 * d.value / totalSize).toPrecision(3);
           var percentageString = percentage + "%";
@@ -552,15 +556,17 @@ function displayRadialTree(url) {
             percentageString = "< 0.1%";
           }
           
-          d3.select("#percentage").text(percentageString);
+          d3.select("#percentage")
+          .text(percentageString);
           
           var sequenceArray = d.ancestors().reverse();
-          sequenceArray.shift(); 
+          sequenceArray.shift(); // remove root node from the array
           updateBreadcrumbs(sequenceArray, percentageString);
           
-          d3.selectAll("path")
-          .style("opacity", 0.3);
+          // Fade all the segments.
+          d3.selectAll("path").style("opacity", 0.3);
           
+          // Then highlight only those that are an ancestor of the current segment.
           vis.selectAll("path")
           .filter(function(node) {
             return (sequenceArray.indexOf(node) >= 0);
@@ -568,19 +574,22 @@ function displayRadialTree(url) {
           .style("opacity", 1);
         }
         
+        // Restore everything to full opacity when moving off the visualization.
         function mouseleave(d) {
           document.getElementById("sequence").innerHTML="";
+          // Deactivate all segments during transition.
           d3.selectAll("path").on("mouseover", null);
           
+          // Transition each segment to full opacity and then reactivate it.
           d3.selectAll("path")
           .transition()
-          
           .style("opacity", 1)
           .on("end", function() {
             d3.select(this).on("mouseover", mouseover);
           });
         }
         
+        // Generate a string that describes the points of a breadcrumb polygon.
         function breadcrumbPoints(d, i) {
           var points = [];
           points.push("0,0");
@@ -588,9 +597,10 @@ function displayRadialTree(url) {
           points.push(b.w + b.t + "," + (b.h / 2));
           points.push(b.w + "," + b.h);
           points.push("0," + b.h);
-          if (i > 0) {
+          if (i > 0) { // Leftmost breadcrumb; don't include 6th vertex.
           points.push(b.t + "," + (b.h / 2));
         }
+
         return points.join(" ");
       }
       
@@ -599,25 +609,28 @@ function displayRadialTree(url) {
         d.dx0 = d.dx;
       }
       
+      // Update the breadcrumb trail to show the current sequence and percentage.
       function updateBreadcrumbs(nodeArray, percentageString) {
         var anc_arr=nodeArray;
+        // Data join; key function combines name and depth (= position in sequence).
         var trail = document.getElementById("sequence");
+        
         var text="";
         var symb=document.createElement('span');
         symb.setAttribute('class','symb');
-        symb.innerHTML=">";
+        symb.innerHTML="/";
         for(var i=0;i<anc_arr.length;i++){
           if(i==0){
             text=" "+anc_arr[i].data.name;
           }else{
             text=text+symb.innerHTML+anc_arr[i].data.name;
           }
-          
         }
-        trail.innerHTML=text;
+        trail.innerHTML=text;        
       }
       
       function drawLegend() {
+        // Dimensions of legend item: width, height, spacing, radius of rounded rect.
         var li = {
           w: 75, h: 30, s: 3, r: 3
         };
@@ -656,8 +669,13 @@ function displayRadialTree(url) {
           legend.style("visibility", "hidden");
         }
       }
+      
       function buildHierarchy(csv) {
         var length=csv.length;
+//        if(length>10000){
+//            length=10000;
+//            document.getElementById('message').innerHTML="There are "+csv.length;
+//        }
         var root = {"name": "root", "children": []};
         for (var i = 0; i < length; i++) {
           var sequence = csv[i][0];
@@ -665,7 +683,7 @@ function displayRadialTree(url) {
           if (isNaN(size)) { // e.g. if this is a header row
             continue;
           }
-          var parts = sequence.split(">");
+          var parts = sequence.split("/");
           var currentNode = root;
           for (var j = 0; j < parts.length; j++) {
             var children = currentNode["children"];
