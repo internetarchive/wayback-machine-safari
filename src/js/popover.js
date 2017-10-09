@@ -125,17 +125,37 @@ function _onSaveSetting() {
     document.getElementById("setting_container").style.display = "none";
 }
 
-var tmpAry = [];
-
 function _onSearch(evt) {
+    if (evt.keyCode == 37 || evt.keyCode == 38 || evt.keyCode == 39 || evt.keyCode == 40 || evt.keyCode == 13) return true;
+
+    if (!$(".tt-menu").hasClass("tt-empty")) {
+        $(".tt-menu").addClass("tt-empty");
+    }
+    $(".tt-menu").css("display", "none");
+
     var keyword = getSearchTerm();
 
     if (keyword.length < 3) return true;
-    tmpAry.forEach(function(url){
-        bloodhound.add({url: url});
-    });
+    
     safari.extension.globalPage.contentWindow._onSearch(keyword, function(suggestions){
-        tmpAry = suggestions;
+        $(".tt-dataset.tt-dataset-0").empty();
+
+        if (suggestions.length == 0) return;
+
+        $(".tt-menu").css("display", "block");
+        $(".tt-menu").removeClass("tt-empty");
+
+        suggestions.forEach(function(url, index){
+            var item = document.createElement("div");
+            item.setAttribute("class","tt-suggestion tt-selectable");
+            item.innerHTML = url;
+            item.onclick = function(){
+                $("#search_term").val(url);
+                $(".tt-menu").css("display", "none");
+            }
+
+            $(".tt-dataset.tt-dataset-0").append(item);
+        });
     });
 }
 
