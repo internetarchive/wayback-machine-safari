@@ -262,11 +262,12 @@ function displayRadialTree(url) {
     var pos=url.indexOf('/');
     if(pos!=-1) url=url.substring(0,pos);
     
+    document.getElementById("RTloader").style.display = "block";
     var xhr = new XMLHttpRequest();
     xhr.open("GET","https://web.archive.org/cdx/search/cdx?url="+url+"/&fl=timestamp,original&matchType=prefix&filter=statuscode:200&filter=mimetype:text/html&output=json", true);       
     xhr.onload = function() {
+      document.getElementById("RTloader").style.display = "none";
       var response = JSON.parse(xhr.responseText);
-      
       var paths_arr=new Array();
       var j=0;
       for(var i=1;i<response.length;i++){
@@ -290,6 +291,7 @@ function displayRadialTree(url) {
         }else if(url.includes('www0')){
             url=url.replace('www0','www');
         }
+
         if(url.indexOf('://www')==(-1)){
           url="http://www."+url.substring(7);
         }
@@ -335,15 +337,15 @@ function displayRadialTree(url) {
       }
 
       var year_arr=new Array();
-      for(var i=0;i<paths_arr.length;i++){
+      for (var i=0;i<paths_arr.length;i++) {
         year_arr[i]=new Array();
         for(var j=0;j<paths_arr[i].length;j++){
-          if(j==0){
+          if (j==0) {
             year_arr[i].push(paths_arr[i][j][1]);
             var date=paths_arr[i][j][0].slice(0,4);
             year_arr[i].push(date);
             
-          }else if(paths_arr[i][j-1][0].slice(0,4)!=paths_arr[i][j][0].slice(0,4)){
+          } else if (paths_arr[i][j-1][0].slice(0,4)!=paths_arr[i][j][0].slice(0,4)) {
             year_arr[i].push(paths_arr[i][j][0].slice(0,4));
           }
         }
@@ -405,13 +407,13 @@ function displayRadialTree(url) {
         }
         
         for(var i=x;i<years[n].length;i++){
-          
           if(i!=(years[n].length-1)){
             text=text+years[n][i]+" ,1"+"\n";
           }else{
             text=text+years[n][i]+" ,1";
           }
         }
+
         return text;
       }  
 
@@ -485,7 +487,6 @@ function displayRadialTree(url) {
         
         // Use d3.text and d3.csvParseRows so that we do not need to have a header
         // row, and can receive the csv as an array of arrays.
-        
         var csv = d3.csvParseRows(text);
         var json = buildHierarchy(csv);
         console.log(json);

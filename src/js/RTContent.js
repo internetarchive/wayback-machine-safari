@@ -15,6 +15,9 @@ function displayRTContent() {
     var span=document.createElement('button');
     var divBtn=document.createElement('div');
     divBtn.setAttribute('id','divBtn');
+    var loader = document.createElement("div");
+    loader.setAttribute("id", "RTloader");
+    loader.style.display = "none";
     var message=document.createElement('div');
     message.setAttribute('id','message');
     
@@ -29,6 +32,7 @@ function displayRTContent() {
     main.setAttribute('id','main');
     
     modal.appendChild(divBtn);
+    modal.appendChild(loader);
     modal.appendChild(span);
     modal.appendChild(sequence);
     modal.appendChild(chart);
