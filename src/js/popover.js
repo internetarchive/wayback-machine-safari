@@ -2,6 +2,7 @@
  * @fileOverview This file provides for the menu that pops over when
  * you click on the Wayback Machine icon in the browser Safari.
  */
+const global = safari.extension.globalPage.contentWindow;
 var bloodhound, typeahead;
 
 window.onload = function(){
@@ -13,7 +14,7 @@ function _onSave() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onSave(getURL());
+        global._onSave(getURL());
     }
 }
 
@@ -21,7 +22,7 @@ function _onRecent() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onRecent(getURL());
+        global._onRecent(getURL());
     }
 }
 
@@ -29,7 +30,7 @@ function _onFirst() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onFirst(getURL());
+        global._onFirst(getURL());
     }
 }
 
@@ -37,7 +38,7 @@ function _onOverview() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onOverview(getURL());
+        global._onOverview(getURL());
     }
 }
 
@@ -45,7 +46,7 @@ function _onAlexa() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onAlexa(getURL());
+        global._onAlexa(getURL());
     }
 }
 
@@ -53,7 +54,7 @@ function _onWhois() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onWhois(getURL());
+        global._onWhois(getURL());
     }
 }
 
@@ -61,7 +62,7 @@ function _onTweets() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onTweets(getURL());
+        global._onTweets(getURL());
     }
 }
 
@@ -69,7 +70,7 @@ function _onRadial() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onRadial(getURL());
+        global._onRadial(getURL());
     }
 }
 
@@ -77,7 +78,7 @@ function _onFacebook() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onFacebook(getURL());
+        global._onFacebook(getURL());
     }
 }
 
@@ -85,7 +86,7 @@ function _onTwitter() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onTwitter(getURL());
+        global._onTwitter(getURL());
     }
 }
 
@@ -93,7 +94,7 @@ function _onGooglePlus() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onGooglePlus(getURL());
+        global._onGooglePlus(getURL());
     }
 }
 
@@ -101,7 +102,7 @@ function _onLinkedin() {
     if (!getURL()) {
         showMessage("Please type a URL");
     } else {
-        safari.extension.globalPage.contentWindow._onLinkedin(getURL());
+        global._onLinkedin(getURL());
     }
 }
 
@@ -137,7 +138,7 @@ function _onSearch(evt) {
 
     if (keyword.length < 3) return true;
     
-    safari.extension.globalPage.contentWindow._onSearch(keyword, function(suggestions){
+    global._onSearch(keyword, function(suggestions){
         $(".tt-dataset.tt-dataset-0").empty();
 
         if (suggestions.length == 0) return;

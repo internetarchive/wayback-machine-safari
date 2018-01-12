@@ -2,6 +2,7 @@ window.onload = function(){
     safari.application.addEventListener("beforeNavigate", _onBeforeNavigate, true);
     safari.application.addEventListener("navigate", _onNavigate, true);
     safari.application.addEventListener("message", handleMessage, true);
+    safari.application.addEventListener("command", performCommand, true);
 }
 
 // Event whenever a new URL is about load there
@@ -32,6 +33,18 @@ function handleMessage(event) {
     }
 }
 
+function performCommand(event) {
+    if (event.command === "cmd_first_version") {
+        _onFirst(popover.getURL());
+    } else if (event.command === "cmd_recent_version") {
+        _onRecent(popover.getURL());
+    } else if (event.command === "cmd_all_versions") {
+        _onOverview(popover.getURL());
+    } else if (event.command === "cmd_save_page_now") {
+        _onSave(popover.getURL());
+    }
+}
+
 function _onSave(url) {
     openURL(BaseURL + "/save/", url);
 }
@@ -43,7 +56,6 @@ function _onRecent(url) {
 }
 
 function _onFirst(url) {
-    console.log("_onFirst-", getOriginalURL(url));
     wmAvailabilityCheck(getOriginalURL(url), function(){
         console.log("_onFirst-");
         openTab(BaseURL + "/web/0/", getOriginalURL(url));
